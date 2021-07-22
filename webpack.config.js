@@ -38,6 +38,7 @@ module.exports = {
     //해당 경로의 파일이 변할때 리로딩하도록 설정
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
+    overlay: true,
     //모듈의 변화만 자동으로 로드하는 Hot Module Replacement 기능 활성화
     hot: true,
     //메모리 뿐만 아니라 파일도 만들것인지 설정'
