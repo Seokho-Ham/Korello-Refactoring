@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  // development, production, none
   mode: 'development',
   devtool: 'eval-cheap-source-map',
   entry: './src/index',
@@ -37,6 +38,7 @@ module.exports = {
     port: 8080,
     //해당 경로의 파일이 변할때 리로딩하도록 설정
     contentBase: path.join(__dirname, 'dist'),
+    historyApiFallback: true,
     compress: true,
     overlay: true,
     //모듈의 변화만 자동으로 로드하는 Hot Module Replacement 기능 활성화
