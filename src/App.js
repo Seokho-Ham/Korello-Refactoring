@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import BoardPage from './pages/BoardPage';
 import LoginPage from './pages/LoginPage';
-import Header from './components/organics/Header';
+import Header from './components/organics/common/Header';
 const App = () => {
   return (
     <BrowserRouter>
@@ -14,7 +14,7 @@ const App = () => {
         <Route exact path='/' component={LoginPage} />
         <Route path='/login' component={LoginPage} />
         <Route path='/boards' component={MainPage} />
-        <Route path='/board/:id' component={BoardPage} />
+        <Route path='/board/:id/cards' component={BoardPage} />
       </Switch>
     </BrowserRouter>
   );

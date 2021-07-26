@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardListContainer from '../components/templates/board/BoardListContainer';
-import SideBar from '../components/templates/board/SideBar';
+import BoardListContainer from '../components/templates/main/BoardListContainer';
+import SideBar from '../components/organics/main/SideBar';
 const MainPage = () => {
   return (
     <MainWrapper>

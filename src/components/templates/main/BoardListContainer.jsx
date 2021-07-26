@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardItem from '../../organics/board/BoardItem';
-import BoardList from '../../organics/board/BoardList';
+import BoardList from '../../organics/main/BoardList';
 
 const BoardListContainer = () => {
   return (

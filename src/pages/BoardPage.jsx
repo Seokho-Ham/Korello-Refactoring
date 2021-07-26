@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import BoardDetailContainer from '../components/templates/board/BoardDetailContainer';
 const BoardPage = () => {
-  return <BoardDiv>보드 상세 화면입니다.</BoardDiv>;
+  return (
+    <BoardDiv>
+      <BoardDetailContainer />
+    </BoardDiv>
+  );
 };
 
 export default BoardPage;
 
 const BoardDiv = styled.div`
-  display: flex;
+  width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
 `;

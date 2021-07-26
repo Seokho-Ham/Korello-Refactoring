@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardItem from './BoardItem';
+import BoardItem from '../../molecules/main/BoardItem';
 const BoardList = () => {
   return (
     <ListWrapper>

@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BoardItem = () => {
   return (
     <BoardItemWrapper>
-      <div>보드 이름</div>
+      <Link to='board/12/cards'>보드 이름</Link>
     </BoardItemWrapper>
   );
 };
