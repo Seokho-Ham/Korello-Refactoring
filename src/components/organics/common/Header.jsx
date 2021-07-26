@@ -12,5 +12,6 @@ const HeaderDiv = styled.div`
   align-items: center;
   width: 100%;
   height: 50px;
-  background: #cacaca;
+  color: #fff;
+  background: #3d3bb8;
 `;

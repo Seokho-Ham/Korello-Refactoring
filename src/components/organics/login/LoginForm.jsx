@@ -3,7 +3,9 @@ import styled from 'styled-components';
 const LoginForm = () => {
   return (
     <LoginFormWrapper>
-      <LoginItemWrapper>로그인 화면입니다.</LoginItemWrapper>
+      <LoginItemWrapper>
+        <h1>로그인 화면입니다.</h1>
+      </LoginItemWrapper>
     </LoginFormWrapper>
   );
 };
@@ -16,7 +18,6 @@ const LoginFormWrapper = styled.div`
   align-items: center;
   width: 1000px;
   height: 100%;
-  border: 1px solid grey;
   overflow-y: hidden;
 `;
 
@@ -27,5 +28,8 @@ const LoginItemWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
+  border-radius: 9px;
+  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 20%);
+  color: #fff;
+  background: #3d3bb8;
 `;
