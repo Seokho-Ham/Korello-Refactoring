@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardDetailContainer from '../components/templates/board/BoardDetailContainer';
+import BoardDetailContainer from '../components/boards/BoardDetailContainer';
 const BoardPage = () => {
   return (
     <BoardDiv>

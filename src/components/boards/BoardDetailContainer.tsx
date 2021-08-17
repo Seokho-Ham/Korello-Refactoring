@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardButtons from '../../organics/board/BoardButtons';
-import BoardTagList from '../../organics/board/BoardTagList';
+import BoardButtons from './BoardButtons';
+import TagList from './tags/TagList';
 const BoardDetailContainer = () => {
   return (
     <BoardContainer>
       <BoardButtons />
-      <BoardTagList />
+      <TagList />
     </BoardContainer>
   );
 };

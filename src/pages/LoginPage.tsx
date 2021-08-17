@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from '../components/organics/login/LoginForm';
+import LoginForm from '../components/login/LoginForm';
 const LoginPage = () => {
   return (
     <>

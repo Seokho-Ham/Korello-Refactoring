@@ -5,10 +5,10 @@ module.exports = {
   // development, production, none
   mode: 'development',
   devtool: 'eval-cheap-source-map',
-  entry: './src/index',
+  entry: './src/index.tsx',
   //웹팩이 모듈을 처리하는 방식을 설정하는 속성. -> 확장자를 생략해도 인식하게 만든다.
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
   //모듈에 적용할 로더들과 옵션의 설정
   //test : 어떤 파일에 적용할지 확장자를 작성
@@ -17,9 +17,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        test: /\.(ts|tsx)$/,
         exclude: '/node_modules/',
+        use: [
+          {
+            loader: 'ts-loader',
+          },
+        ],
       },
     ],
   },

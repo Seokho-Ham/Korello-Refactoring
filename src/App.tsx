@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import BoardPage from './pages/BoardPage';
 import LoginPage from './pages/LoginPage';
-import Header from './components/organics/common/Header';
+import Header from './components/common/Header';
 const App = () => {
   return (
     <BrowserRouter>
