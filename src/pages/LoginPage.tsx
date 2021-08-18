@@ -27,6 +27,4 @@ const LoginPageContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  /* background: #e2e2e2; */
-  /* background: #fff; */
 `;
