@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'eval-cheap-source-map',
   entry: './src/index.tsx',
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -37,10 +37,7 @@ module.exports = {
     overlay: true,
     hot: true,
     proxy: {
-      '/api': {
-        target: 'korello.app',
-        changeOrigin: true,
-      },
+      '/api': { target: 'korello.app', changeOrigin: true },
     },
   },
 };

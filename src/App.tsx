@@ -1,11 +1,9 @@
 import React from 'react';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import BoardPage from './pages/BoardPage';
-import LoginPage from './pages/LoginPage';
+import { MainPage, BoardPage, LoginPage } from './pages';
 import Header from './components/common/Header';
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
