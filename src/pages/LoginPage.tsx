@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import LoginForm from '../components/login/LoginForm';
+import { checkUrlToken } from '../modules/checkUrlToken';
 import { RootState } from '../reducers';
 import { login } from '../reducers/login';
 
@@ -11,8 +12,9 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const tokenStatus = checkUrlToken(window.location.search);
     const token = localStorage.getItem('accessToken');
-    if (token) {
+    if (tokenStatus || token) {
       dispatch(login());
     }
   }, []);
