@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from '../components/organics/login/LoginForm';
+import LoginForm from '../components/login/LoginForm';
+
 const LoginPage = () => {
   return (
     <>
@@ -27,6 +28,4 @@ const LoginPageContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  /* background: #e2e2e2; */
-  /* background: #fff; */
 `;

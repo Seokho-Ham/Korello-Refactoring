@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TagItem from '../../molecules/board/TagItem';
+import TagItem from './TagItem';
 
 const BoardTagList = () => {
   return (

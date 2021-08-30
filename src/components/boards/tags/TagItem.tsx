@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CardItem from './CardItem';
+import CardItem from '../cards/CardItem';
 const TagItem = () => {
   return (
     <TagItemContainer>
