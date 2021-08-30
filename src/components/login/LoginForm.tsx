@@ -4,7 +4,13 @@ const LoginForm = () => {
   return (
     <LoginFormWrapper>
       <LoginItemWrapper>
-        <h1>로그인 화면입니다.</h1>
+        <a href='http://hyuki.app/oauth2/authorization/kakao' data-testid='login-button'>
+          <img
+            src='//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg'
+            width='222'
+            alt='login'
+          />
+        </a>
       </LoginItemWrapper>
     </LoginFormWrapper>
   );
@@ -24,12 +30,12 @@ const LoginFormWrapper = styled.div`
 const LoginItemWrapper = styled.div`
   display: flex;
   width: 500px;
-  height: 600px;
+  height: 400px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 9px;
   box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 20%);
   color: #fff;
-  background: #3d3bb8;
+  /* background: #3d3bb8; */
 `;
