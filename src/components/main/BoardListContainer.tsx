@@ -17,7 +17,6 @@ export default BoardListContainer;
 const BoardListWrapper = styled.div`
   width: 700px;
   height: 100%;
-  border: 1px solid;
 `;
 
 const BoardListDiv = styled.div`

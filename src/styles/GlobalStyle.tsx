@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size : 1rem;
     height : 100%;
     overflow: hidden;
+    
   }
 
   body {
@@ -14,5 +15,9 @@ export const GlobalStyle = createGlobalStyle`
 
   #root{
     height : 100%;    
+  }
+  
+  a{
+    text-decoration: none;
   }
 `;

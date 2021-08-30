@@ -1,18 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { boardList } from '../../assets/data';
 import BoardItem from './BoardItem';
 const BoardList = () => {
   return (
     <ListWrapper>
       <ListTitle>보드 종류</ListTitle>
       <ListItems>
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
+        {boardList.map(board => (
+          <BoardItem id={board.id} title={board.title} />
+        ))}
       </ListItems>
     </ListWrapper>
   );
@@ -21,11 +18,12 @@ const BoardList = () => {
 export default BoardList;
 
 const ListWrapper = styled.div`
-  margin: 5px 0px;
-  border: 2px solid grey;
+  margin: 20px 0px;
   max-width: 98%;
 `;
 const ListTitle = styled.div`
+  font-size: 18px;
+  font-weight: bold;
   height: 40px;
 `;
 const ListItems = styled.div`
