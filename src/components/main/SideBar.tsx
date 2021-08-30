@@ -19,7 +19,7 @@ const SideBarWrapper = styled.div`
   height: 100%;
   border: 1px solid;
 `;
-const SideBarTitle = styled.div`
+const SideBarTitle = styled.a`
   margin: 5px 5px;
   border: 1px solid grey;
   min-height: 50px;

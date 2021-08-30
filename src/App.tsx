@@ -1,6 +1,6 @@
 import React from 'react';
 import { GlobalStyle } from './styles/GlobalStyle';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MainPage, BoardPage, LoginPage } from './pages';
 import Header from './components/common/Header';
 const App: React.FC = () => {
