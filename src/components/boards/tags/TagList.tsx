@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import TagItem from './TagItem';
-
+import { tagList } from '../../../assets/data';
 const BoardTagList = () => {
   return (
     <TagListContainer>
-      <TagItem />
-      <TagItem />
-      <TagItem />
-      <TagItem />
-      <TagItem />
-      <TagItem />
-      <TagItem />
+      {tagList.map(el => (
+        <TagItem key={el.id} id={el.id} title={el.title} cards={el.cards} />
+      ))}
     </TagListContainer>
   );
 };

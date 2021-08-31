@@ -1,15 +1,17 @@
 import React from 'react';
-import { GlobalStyle } from './styles/global-style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MainPage, BoardPage, LoginPage } from './pages';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from './styles/theme';
 import Header from './components/common/Header';
+import { GlobalStyle } from './styles/global-style';
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={myTheme}>
       <GlobalStyle />
-      <ThemeProvider theme={myTheme}>
+
+      <BrowserRouter>
+
         <Header />
         <Switch>
           <Route exact path='/' component={LoginPage} />
@@ -17,8 +19,8 @@ const App: React.FC = () => {
           <Route path='/boards' component={MainPage} />
           <Route path='/board/:id/cards' component={BoardPage} />
         </Switch>
-      </ThemeProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 

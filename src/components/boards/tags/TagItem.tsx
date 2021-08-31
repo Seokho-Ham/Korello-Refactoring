@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Tag } from '../../../assets/data';
 import CardItem from '../cards/CardItem';
-const TagItem = () => {
+
+const TagItem = ({ id, title, cards }: Tag) => {
   return (
-    <TagItemContainer>
-      <TagTitle>태그 아이템</TagTitle>
+    <TagItemContainer data-testId={id}>
+      <TagTitle>{title}</TagTitle>
       <CardList>
         <CardItem />
       </CardList>

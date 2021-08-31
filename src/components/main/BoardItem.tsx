@@ -11,7 +11,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, title }) => {
   return (
     <BoardItemWrapper>
       <BoardItemTitle>
-        <Link to={`board/${id}/cards`}>{title}</Link>
+        <Link to={`/board/${id}/cards`}>{title}</Link>
       </BoardItemTitle>
     </BoardItemWrapper>
   );
@@ -24,9 +24,10 @@ const BoardItemWrapper = styled.div`
   height: 100px;
   margin: 5px;
   border: 1px solid red;
-  border-radius: 5px;
+  border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
 const BoardItemTitle = styled.div`
   margin: 5px 7px;
+  font-size: ${({ theme }) => theme.font.medium};
 `;
