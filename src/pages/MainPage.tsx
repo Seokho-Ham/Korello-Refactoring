@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from '../components/common/Button';
 import BoardListContainer from '../components/main/BoardListContainer';
 import SideBar from '../components/main/SideBar';
 
 const MainPage = () => {
+  const onClickHandler: () => void = () => {
+    console.log('button clicked');
+  };
   return (
     <MainWrapper>
       <SideBar />

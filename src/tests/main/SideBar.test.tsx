@@ -20,7 +20,6 @@ describe('<SideBar/>', () => {
       </BrowserRouter>,
     );
     expect(container).toBeInTheDocument();
-
     const boardElement = screen.queryByText('Board');
     expect(boardElement).toBeInTheDocument();
   });

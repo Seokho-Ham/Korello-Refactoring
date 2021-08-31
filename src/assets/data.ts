@@ -3,6 +3,7 @@ export interface Board {
   title: string;
 }
 
+
 export interface Card {
   id: number;
   title: string;
@@ -37,3 +38,4 @@ export const tagList: Tag[] = [
   { id: 4, title: '태그 4', cards: [{ id: 4, title: '카드4', content: '카드입니다' }] },
   { id: 5, title: '태그 5', cards: [{ id: 5, title: '카드5', content: '카드입니다' }] },
 ];
+

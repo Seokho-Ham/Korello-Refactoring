@@ -9,7 +9,9 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={myTheme}>
       <GlobalStyle />
+
       <BrowserRouter>
+
         <Header />
         <Switch>
           <Route exact path='/' component={LoginPage} />
