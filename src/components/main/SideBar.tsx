@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const SideBar = () => {
   return (
     <SideBarWrapper>
-      <SideBarTitle>사이드바 항목</SideBarTitle>
-      <SideBarTitle>사이드바 항목</SideBarTitle>
-      <SideBarTitle>사이드바 항목</SideBarTitle>
+      <SideBarTitle href='http://localhost:8080/boards'>
+        <span>Board</span>
+      </SideBarTitle>
     </SideBarWrapper>
   );
 };
@@ -17,10 +17,16 @@ const SideBarWrapper = styled.div`
   flex-direction: column;
   width: 300px;
   height: 100%;
-  border: 1px solid;
+  /* border: 1px solid; */
 `;
-const SideBarTitle = styled.div`
-  margin: 5px 5px;
-  border: 1px solid grey;
+const SideBarTitle = styled.a`
+  margin: 20px;
+  font-size: 18px;
+  font-weight: bold;
   min-height: 50px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  span {
+    margin-left: 10px;
+  }
 `;
