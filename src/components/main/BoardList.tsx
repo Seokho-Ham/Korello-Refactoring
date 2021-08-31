@@ -8,7 +8,7 @@ const BoardList = () => {
       <ListTitle>보드 종류</ListTitle>
       <ListItems>
         {boardList.map(board => (
-          <BoardItem id={board.id} title={board.title} />
+          <BoardItem key={board.id} id={board.id} title={board.title} />
         ))}
       </ListItems>
     </ListWrapper>
