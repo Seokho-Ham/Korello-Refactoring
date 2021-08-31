@@ -9,22 +9,24 @@ type BoardItemProps = {
 
 const BoardItem: React.FC<BoardItemProps> = ({ id, title }) => {
   return (
-    <BoardItemWrapper>
-      <BoardItemTitle>
-        <Link to={`/board/${id}/cards`}>{title}</Link>
-      </BoardItemTitle>
+    <BoardItemWrapper to={`/board/${id}/cards`}>
+      <BoardItemTitle>{title}</BoardItemTitle>
     </BoardItemWrapper>
   );
 };
 
 export default BoardItem;
 
-const BoardItemWrapper = styled.div`
+const BoardItemWrapper = styled(Link)`
   width: 200px;
   height: 100px;
   margin: 5px;
-  border: 1px solid red;
+  box-shadow: ${({ theme }) => theme.shadow};
   border-radius: ${({ theme }) => theme.borderRadius};
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.color.grey3};
+  }
 `;
 
 const BoardItemTitle = styled.div`

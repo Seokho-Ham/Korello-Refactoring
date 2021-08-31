@@ -5,7 +5,7 @@ import CardItem from '../cards/CardItem';
 
 const TagItem = ({ id, title, cards }: Tag) => {
   return (
-    <TagItemContainer data-testId={id}>
+    <TagItemContainer>
       <TagTitle>{title}</TagTitle>
       <CardList>
         <CardItem />
@@ -24,19 +24,20 @@ const TagItemContainer = styled.div`
   min-height: 50px;
   max-height: 90%;
   margin: 10px;
-  border: 1px solid green;
+  padding: 5px;
   overflow: hidden;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.color.grey2};
 `;
 
 const TagTitle = styled.div`
   height: 50px;
   margin: 5px;
-  border: 1px solid grey;
+  font-size: ${({ theme }) => theme.font.medium};
 `;
 const CardList = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   margin: 5px;
-  border: 1px solid grey;
 `;

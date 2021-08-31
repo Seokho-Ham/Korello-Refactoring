@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // development, production, none
   mode: 'development',
-  devtool: 'eval-cheap-source-map',
+  devtool: 'eval',
   entry: './src/index.tsx',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -15,6 +15,10 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         exclude: '/node_modules/',
         loader: 'ts-loader',
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        loader: 'file-loader',
       },
     ],
   },
@@ -31,13 +35,12 @@ module.exports = {
   devServer: {
     port: 8080,
     contentBase: path.join(__dirname, 'dist'),
+    // host: 'korello.app',
     historyApiFallback: true,
     inline: true,
     compress: true,
     overlay: true,
     hot: true,
-    proxy: {
-      '/api': { target: 'korello.app', changeOrigin: true },
-    },
+    stats: 'errors-only',
   },
 };

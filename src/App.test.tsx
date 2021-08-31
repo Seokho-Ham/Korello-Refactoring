@@ -16,9 +16,4 @@ describe('<App/>', () => {
     );
     expect(container).toBeInTheDocument();
   });
-
-  it('render Header', () => {
-    render(<Header />);
-    expect(screen.getByText('헤더입니다.')).toBeInTheDocument();
-  });
 });

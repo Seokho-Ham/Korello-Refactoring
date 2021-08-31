@@ -11,7 +11,6 @@ const App: React.FC = () => {
       <GlobalStyle />
 
       <BrowserRouter>
-
         <Header />
         <Switch>
           <Route exact path='/' component={LoginPage} />
