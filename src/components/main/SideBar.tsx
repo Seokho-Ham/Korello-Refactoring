@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
+export const sideBarList: { id: number; type: string; name: string }[] = [
+  { id: 1, type: 'board', name: 'Board' },
+];
+
 const SideBar = () => {
   return (
     <SideBarWrapper>
@@ -17,11 +22,10 @@ const SideBarWrapper = styled.div`
   flex-direction: column;
   width: 300px;
   height: 100%;
-  /* border: 1px solid; */
 `;
 const SideBarTitle = styled.a`
   margin: 20px;
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.font.large};
   font-weight: bold;
   min-height: 50px;
   border-radius: 5px;

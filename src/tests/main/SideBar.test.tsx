@@ -1,26 +1,35 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SideBar from '../../components/main/SideBar';
+import SideBar, { sideBarList } from '../../components/main/SideBar';
+import { ThemeProvider } from 'styled-components';
+import { myTheme } from '../../styles/theme';
 
 describe('<SideBar/>', () => {
-  beforeEach(() => {
-    render(<SideBar />);
-  });
-
   it('render SideBar', () => {
-    const { container } = render(<SideBar />);
+    const { container } = render(
+      <ThemeProvider theme={myTheme}>
+        <SideBar />
+      </ThemeProvider>,
+    );
     expect(container).toBeInTheDocument();
-  });
 
-  it('contains each element', () => {
     const boardElement = screen.queryByText('Board');
     expect(boardElement).toBeInTheDocument();
   });
 
-  it('moves to the link on onclick event', async () => {
-    const boardElement = screen.getByText('Board');
-    await userEvent.click(boardElement);
-    expect(boardElement).toBeInTheDocument();
+  it('render clicked page', () => {
+    render(
+      <ThemeProvider theme={myTheme}>
+        <SideBar />
+      </ThemeProvider>,
+    );
+    sideBarList.map(async el => {
+      const item = screen.queryByText(el.name);
+      if (item) {
+        await userEvent.click(item);
+        expect(screen.queryByText('보드 종류')).toBeInTheDocument();
+      }
+    });
   });
 });

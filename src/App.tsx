@@ -1,5 +1,4 @@
 import React from 'react';
-import { GlobalStyle } from './styles/global-style';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MainPage, BoardPage, LoginPage } from './pages';
 import { ThemeProvider } from 'styled-components';
@@ -8,7 +7,6 @@ import Header from './components/common/Header';
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <GlobalStyle />
       <ThemeProvider theme={myTheme}>
         <Header />
         <Switch>
