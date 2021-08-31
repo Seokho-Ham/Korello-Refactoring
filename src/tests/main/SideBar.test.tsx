@@ -36,7 +36,7 @@ describe('<SideBar/>', () => {
     sideBarList.map(el => {
       const item = screen.getByText(el.name);
       userEvent.click(item);
-      expect(screen.getByText('보드 종류')).toBeInTheDocument();
+      expect(screen.getByText('Personal Boards')).toBeInTheDocument();
     });
   });
 });

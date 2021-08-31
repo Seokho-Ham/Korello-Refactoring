@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 const BoardButtons = () => {
-  return <BoardButtonContainer>보드 버튼 목록입니다.</BoardButtonContainer>;
+  return (
+    <BoardButtonContainer>
+      <div>보드 버튼 목록입니다.</div>
+    </BoardButtonContainer>
+  );
 };
 
 export default BoardButtons;
@@ -11,5 +15,5 @@ const BoardButtonContainer = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
-  border: 1px solid yellowgreen;
+  font-size: ${({ theme }) => theme.font.medium};
 `;

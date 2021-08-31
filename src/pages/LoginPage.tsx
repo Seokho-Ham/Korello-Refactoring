@@ -6,6 +6,7 @@ import LoginForm from '../components/login/LoginForm';
 import { checkUrlToken } from '../modules/checkUrlToken';
 import { RootState } from '../reducers';
 import { login } from '../reducers/login';
+import mainBg from '../assets/images/main-bg2.jpg';
 
 const LoginPage = () => {
   const loginStatus = useSelector((state: RootState) => state.loginStatus.status);
@@ -44,6 +45,8 @@ const LoginPageContainer = styled.div`
   width: 100%;
   height: 100%;
   justify-content: center;
-  align-items: center;
   align-content: center;
+  background-image: url(${mainBg});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 `;

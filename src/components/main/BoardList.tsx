@@ -5,7 +5,7 @@ import BoardItem from './BoardItem';
 const BoardList = () => {
   return (
     <ListWrapper>
-      <ListTitle>보드 종류</ListTitle>
+      <ListTitle>Personal Boards</ListTitle>
       <ListItems>
         {boardList.map(board => (
           <BoardItem key={board.id} id={board.id} title={board.title} />
@@ -22,9 +22,10 @@ const ListWrapper = styled.div`
   max-width: 98%;
 `;
 const ListTitle = styled.div`
-  font-size: 18px;
+  font-size: ${({ theme }) => theme.font.large};
   font-weight: bold;
   height: 40px;
+  margin: 20px 0px;
 `;
 const ListItems = styled.div`
   display: flex;

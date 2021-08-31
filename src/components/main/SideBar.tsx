@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <SideBarWrapper>
       <SideBarTitle to='/boards'>
-        <span>Board</span>
+        <div>Board</div>
       </SideBarTitle>
     </SideBarWrapper>
   );
@@ -31,7 +31,11 @@ const SideBarTitle = styled(Link)`
   min-height: 50px;
   border-radius: 5px;
   background-color: #f5f5f5;
-  span {
+  div {
+    margin-top: 15px;
     margin-left: 10px;
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.color.grey3};
   }
 `;

@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import mainLogo from '../../assets/images/main-logo.png';
+
 const LoginForm = () => {
   return (
     <LoginFormWrapper>
+      <LogoContainer />
       <LoginItemWrapper>
         <a href='http://hyuki.app/oauth2/authorization/kakao' data-testid='login-button'>
           <img
@@ -20,22 +23,32 @@ export default LoginForm;
 
 const LoginFormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 1000px;
-  height: 100%;
+  height: 50%;
   overflow-y: hidden;
 `;
 
 const LoginItemWrapper = styled.div`
   display: flex;
   width: 500px;
-  height: 400px;
+  height: 200px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 9px;
-  box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 20%);
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 10px;
   color: #fff;
-  /* background: #3d3bb8; */
+  background: ${({ theme }) => theme.color.grey1};
+`;
+
+const LogoContainer = styled.div`
+  background-image: url(${mainLogo});
+  background-repeat: no-repeat;
+  background-size: 500px;
+  width: 500px;
+  height: 200px;
+  margin: 20px;
 `;

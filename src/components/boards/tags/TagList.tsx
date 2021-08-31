@@ -19,5 +19,5 @@ const TagListContainer = styled.div`
   height: 95%;
   display: flex;
   overflow-x: scroll;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;

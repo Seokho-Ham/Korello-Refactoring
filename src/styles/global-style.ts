@@ -22,9 +22,9 @@ export const GlobalStyle = createGlobalStyle`
   
   a{
     text-decoration: none;
+    color: black;
   }
   button, input{
     margin:0px;
-    /* border: 1px; */
   }
 `;

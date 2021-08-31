@@ -7,8 +7,11 @@ const CardItem = () => {
 export default CardItem;
 
 const CardItemContainer = styled.div`
-  min-height: 60px;
+  min-height: 50px;
   max-height: 100px;
-  border: 1px solid grey;
+  background: #fff;
   margin: 5px;
+  padding: 5px;
+  box-shadow: ${({ theme }) => theme.shadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
 `;
