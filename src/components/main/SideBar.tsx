@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const sideBarList: { id: number; type: string; name: string }[] = [
@@ -8,7 +9,7 @@ export const sideBarList: { id: number; type: string; name: string }[] = [
 const SideBar = () => {
   return (
     <SideBarWrapper>
-      <SideBarTitle href='http://localhost:8080/boards'>
+      <SideBarTitle to='/boards'>
         <span>Board</span>
       </SideBarTitle>
     </SideBarWrapper>
@@ -23,7 +24,7 @@ const SideBarWrapper = styled.div`
   width: 300px;
   height: 100%;
 `;
-const SideBarTitle = styled.a`
+const SideBarTitle = styled(Link)`
   margin: 20px;
   font-size: ${({ theme }) => theme.font.large};
   font-weight: bold;

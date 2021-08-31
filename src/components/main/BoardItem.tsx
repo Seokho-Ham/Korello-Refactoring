@@ -11,7 +11,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, title }) => {
   return (
     <BoardItemWrapper>
       <BoardItemTitle>
-        <Link to={`board/${id}/cards`}>{title}</Link>
+        <Link to={`/board/${id}/cards`}>{title}</Link>
       </BoardItemTitle>
     </BoardItemWrapper>
   );

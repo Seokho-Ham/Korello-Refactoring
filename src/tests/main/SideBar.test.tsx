@@ -4,13 +4,20 @@ import userEvent from '@testing-library/user-event';
 import SideBar, { sideBarList } from '../../components/main/SideBar';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from '../../styles/theme';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import App from '../../App';
+import rootReducer from '../../reducers';
+import { createStore } from 'redux';
 
 describe('<SideBar/>', () => {
   it('render SideBar', () => {
     const { container } = render(
-      <ThemeProvider theme={myTheme}>
-        <SideBar />
-      </ThemeProvider>,
+      <BrowserRouter>
+        <ThemeProvider theme={myTheme}>
+          <SideBar />
+        </ThemeProvider>
+      </BrowserRouter>,
     );
     expect(container).toBeInTheDocument();
 
@@ -19,17 +26,18 @@ describe('<SideBar/>', () => {
   });
 
   it('render clicked page', () => {
+    const store = createStore(rootReducer);
+    localStorage.setItem('accessToken', '1');
+
     render(
-      <ThemeProvider theme={myTheme}>
-        <SideBar />
-      </ThemeProvider>,
+      <Provider store={store}>
+        <App />
+      </Provider>,
     );
-    sideBarList.map(async el => {
-      const item = screen.queryByText(el.name);
-      if (item) {
-        await userEvent.click(item);
-        expect(screen.queryByText('보드 종류')).toBeInTheDocument();
-      }
+    sideBarList.map(el => {
+      const item = screen.getByText(el.name);
+      userEvent.click(item);
+      expect(screen.getByText('보드 종류')).toBeInTheDocument();
     });
   });
 });
