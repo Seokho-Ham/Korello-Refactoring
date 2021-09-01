@@ -7,17 +7,13 @@ import Button from '../Button';
 const HeaderRightButtons = () => {
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    if (window.confirm('로그아웃 하시겠습니까?')) {
-      localStorage.clear();
-      dispatch(login());
-    }
+    localStorage.clear();
+    dispatch(login());
   };
 
   return (
     <Container>
-      <Button className='logout-button' onClick={logoutHandler}>
-        Logout
-      </Button>
+      <Button onClick={logoutHandler}>Logout</Button>
     </Container>
   );
 };

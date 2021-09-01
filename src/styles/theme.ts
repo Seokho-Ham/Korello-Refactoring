@@ -22,7 +22,7 @@ const myTheme: DefaultTheme = {
   },
 
   button: {
-    width: '5rem',
+    width: 'auto',
     height: '2.5rem',
   },
 };

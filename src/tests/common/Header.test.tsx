@@ -14,11 +14,11 @@ describe('<Header/>', () => {
 
     const logoutBt = screen.getByText('Logout');
     const logoImg = screen.getByLabelText('logo-image');
-    const homeBt = screen.getByRole('button', { name: 'button-home' });
+    // const boardListBt = screen.getByRole('button', { name: 'button-boards' });
 
     expect(logoutBt).toBeInTheDocument();
     expect(logoImg).toBeInTheDocument();
-    expect(homeBt).toBeInTheDocument();
+    // expect(boardListBt).toBeInTheDocument();
   });
 
   it('the buttons should activate', () => {
@@ -27,10 +27,10 @@ describe('<Header/>', () => {
 
     const logoutBt = screen.getByText('Logout');
     const logoImg = screen.getByLabelText('logo-image');
-    const homeBt = screen.getByRole('button', { name: 'button-home' });
+    // const boardListBt = screen.getByRole('button', { name: 'button-boards' });
 
-    userEvent.click(homeBt);
-    expect(screen.getByText('보드 1')).toBeInTheDocument();
+    // userEvent.click(boardListBt);
+    // expect(screen.getByText('보드 1')).toBeInTheDocument();
 
     userEvent.click(logoImg);
     expect(screen.getByText('보드 1')).toBeInTheDocument();

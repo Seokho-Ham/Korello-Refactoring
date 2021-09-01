@@ -17,23 +17,11 @@ type ButtonProps = {
   width?: string;
   height?: string;
   disabled?: boolean;
-  className?: string;
 };
 
-const Button = ({
-  bgColor,
-  onClick,
-  children,
-  visible,
-  width,
-  height,
-  disabled,
-  className,
-}: ButtonProps) => {
+const Button = ({ bgColor, onClick, children, visible, width, height, disabled }: ButtonProps) => {
   return (
-    <Container className={className} {...{ bgColor, width, height, visible, disabled, onClick }}>
-      {children}
-    </Container>
+    <Container {...{ bgColor, width, height, visible, disabled, onClick }}>{children}</Container>
   );
 };
 
