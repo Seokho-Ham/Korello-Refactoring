@@ -1,10 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import logo from '../../assets/images/title-logo.png';
-
+import { RootState } from '../../reducers';
 const Header = () => {
+  const loginStatus = useSelector((state: RootState) => state.loginStatus.status);
+
   return (
-    <HeaderDiv>
+    <HeaderDiv loginStatus={loginStatus}>
       <HeaderLogo />
     </HeaderDiv>
   );
@@ -12,8 +15,8 @@ const Header = () => {
 
 export default Header;
 
-const HeaderDiv = styled.div`
-  display: flex;
+const HeaderDiv = styled.div<{ loginStatus: boolean }>`
+  display: ${({ loginStatus }) => (loginStatus ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   width: 100%;

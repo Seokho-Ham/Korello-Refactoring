@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import LoginForm from '../components/login/LoginForm';
-import { checkUrlToken } from '../modules/checkUrlToken';
+import { checkUrlToken } from '../utils/login/checkUrlToken';
 import { RootState } from '../reducers';
 import { login } from '../reducers/login';
 import mainBg from '../assets/images/main-bg2.jpg';

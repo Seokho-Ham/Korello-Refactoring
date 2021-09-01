@@ -1,19 +1,10 @@
 import React from 'react';
 import BoardListContainer from '../../components/main/BoardListContainer';
-import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { myTheme } from '../../styles/theme';
+import { render } from '../../utils/test-utils';
 
 describe('<Board List/>', () => {
   it('render Board List', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <ThemeProvider theme={myTheme}>
-          <BoardListContainer />
-        </ThemeProvider>
-      </BrowserRouter>,
-    );
+    const { container } = render(<BoardListContainer />);
     expect(container).toBeInTheDocument();
   });
 });
