@@ -17,6 +17,7 @@ type ButtonProps = {
   width?: string;
   height?: string;
   disabled?: boolean;
+  className?: string;
 };
 
 const Button = ({
@@ -27,9 +28,14 @@ const Button = ({
   width,
   height,
   disabled,
+  className,
 }: ButtonProps) => {
   return (
-    <Container {...{ bgColor, width, height, visible, disabled }} onClick={onClickHandler}>
+    <Container
+      className={className}
+      {...{ bgColor, width, height, visible, disabled }}
+      onClick={onClickHandler}
+    >
       {children}
     </Container>
   );
@@ -42,7 +48,13 @@ const Container = styled.button<ButtonContainer>`
   width: ${({ theme, width }) => (width ? width : theme.button.width)};
   height: ${({ theme, height }) => (height ? height : theme.button.height)};
   visibility: ${({ visible }) => (!visible ? 'visible' : 'hidden')};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border: 0px;
+  cursor: pointer;
   &:disabled {
     cursor: default;
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.color.grey3};
   }
 `;

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MainPage, BoardPage, LoginPage } from './pages';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from './styles/theme';
-import Header from './components/common/Header';
+import Header from './components/common/header/Header';
 import { GlobalStyle } from './styles/global-style';
 import LoginProvider from './components/login/LoginProvider';
 const App: React.FC = () => {
