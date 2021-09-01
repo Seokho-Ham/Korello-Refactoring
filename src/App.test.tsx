@@ -1,19 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from './utils/test-utils';
 import App from './App';
-import { Provider } from 'react-redux';
-import rootReducer from './reducers';
-import { createStore } from 'redux';
-import Header from './components/common/Header';
-const store = createStore(rootReducer);
 
 describe('<App/>', () => {
   it('render components on App', () => {
-    const { container } = render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-    );
+    const { container } = render(<App />);
     expect(container).toBeInTheDocument();
   });
 });
