@@ -11,7 +11,7 @@ type ButtonContainer = {
 
 type ButtonProps = {
   bgColor?: string;
-  onClickHandler: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   children: ReactChild;
   visible?: boolean;
   width?: string;
@@ -19,19 +19,9 @@ type ButtonProps = {
   disabled?: boolean;
 };
 
-const Button = ({
-  bgColor,
-  onClickHandler,
-  children,
-  visible,
-  width,
-  height,
-  disabled,
-}: ButtonProps) => {
+const Button = ({ bgColor, onClick, children, visible, width, height, disabled }: ButtonProps) => {
   return (
-    <Container {...{ bgColor, width, height, visible, disabled }} onClick={onClickHandler}>
-      {children}
-    </Container>
+    <Container {...{ bgColor, width, height, visible, disabled, onClick }}>{children}</Container>
   );
 };
 
@@ -42,7 +32,13 @@ const Container = styled.button<ButtonContainer>`
   width: ${({ theme, width }) => (width ? width : theme.button.width)};
   height: ${({ theme, height }) => (height ? height : theme.button.height)};
   visibility: ${({ visible }) => (!visible ? 'visible' : 'hidden')};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border: 0px;
+  cursor: pointer;
   &:disabled {
     cursor: default;
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.color.grey3};
   }
 `;

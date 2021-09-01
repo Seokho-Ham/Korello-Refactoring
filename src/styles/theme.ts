@@ -8,7 +8,7 @@ const myTheme: DefaultTheme = {
     green: '#61d341',
     blue: '#0079b',
     grey1: '#f4f5f7',
-    grey2: '#eeeeee',
+    grey2: '#f5f5f5',
     grey3: '#e5e5e5',
     white: '#fff',
   },
@@ -22,7 +22,7 @@ const myTheme: DefaultTheme = {
   },
 
   button: {
-    width: '5rem',
+    width: 'auto',
     height: '2.5rem',
   },
 };
