@@ -11,7 +11,7 @@ type ButtonContainer = {
 
 type ButtonProps = {
   bgColor?: string;
-  onClickHandler: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   children: ReactChild;
   visible?: boolean;
   width?: string;
@@ -22,7 +22,7 @@ type ButtonProps = {
 
 const Button = ({
   bgColor,
-  onClickHandler,
+  onClick,
   children,
   visible,
   width,
@@ -31,11 +31,7 @@ const Button = ({
   className,
 }: ButtonProps) => {
   return (
-    <Container
-      className={className}
-      {...{ bgColor, width, height, visible, disabled }}
-      onClick={onClickHandler}
-    >
+    <Container className={className} {...{ bgColor, width, height, visible, disabled, onClick }}>
       {children}
     </Container>
   );

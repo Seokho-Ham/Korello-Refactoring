@@ -15,7 +15,7 @@ const HeaderRightButtons = () => {
 
   return (
     <Container>
-      <Button className='logout-button' onClickHandler={logoutHandler}>
+      <Button className='logout-button' onClick={logoutHandler}>
         Logout
       </Button>
     </Container>
