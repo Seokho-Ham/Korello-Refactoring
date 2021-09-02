@@ -35,7 +35,7 @@ const Container = styled.button<ButtonContainer>`
   width: ${({ theme, size }) => (size ? size.width : theme.button.width)};
   height: ${({ theme, size }) => (size ? size.height : theme.button.height)};
   border-radius: ${({ theme }) => theme.borderRadius};
-  color: ${({ btType }) => (btType === 'add' ? 'white' : 'black')};
+  color: ${({ btType }) => (btType ? 'white' : 'black')};
   border: 0px;
   cursor: pointer;
   &:disabled {
