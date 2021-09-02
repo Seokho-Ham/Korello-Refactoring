@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { boardList } from '../../assets/data';
+import Button from '../common/Button';
+import AddBoardForm from './AddBoardForm';
 import BoardItem from './BoardItem';
 const BoardList = () => {
   return (
@@ -10,6 +13,7 @@ const BoardList = () => {
         {boardList.map(board => (
           <BoardItem key={board.id} id={board.id} title={board.title} />
         ))}
+        <AddBoardForm />
       </ListItems>
     </ListWrapper>
   );

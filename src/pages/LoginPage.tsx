@@ -3,22 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import LoginForm from '../components/login/LoginForm';
-import { checkUrlToken } from '../utils/login/checkUrlToken';
 import { RootState } from '../reducers';
-import { login } from '../reducers/login';
 import mainBg from '../assets/images/main-bg2.jpg';
 
 const LoginPage = () => {
   const loginStatus = useSelector((state: RootState) => state.loginStatus.status);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const tokenStatus = checkUrlToken(window.location.search);
-    const token = localStorage.getItem('accessToken');
-    if (tokenStatus || token) {
-      dispatch(login());
-    }
-  }, []);
 
   return loginStatus ? (
     <Redirect to='/boards' />
