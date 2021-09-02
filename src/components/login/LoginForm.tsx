@@ -33,7 +33,7 @@ const LoginFormWrapper = styled.div`
 
 const LoginItemWrapper = styled.div`
   display: flex;
-  width: 500px;
+  width: 400px;
   height: 200px;
   flex-direction: column;
   justify-content: center;
