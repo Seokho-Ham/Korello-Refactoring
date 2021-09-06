@@ -1,16 +1,26 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { Tag } from '../../../assets/data';
-import CardItem from '../cards/CardItem';
+import { Card } from '../../../assets/data';
+import CardList from '../cards/CardList';
 
-const TagItem = ({ id, title, cards }: Tag) => {
+interface TagItemProps {
+  id: number;
+  title: string;
+  index: number;
+  cards: Card[];
+}
+
+const TagItem = ({ id, index, title, cards }: TagItemProps) => {
   return (
-    <TagItemContainer>
-      <TagTitle>{title}</TagTitle>
-      <CardList>
-        <CardItem />
-      </CardList>
-    </TagItemContainer>
+    <Draggable key={id} draggableId={title} index={index}>
+      {provided => (
+        <TagItemContainer ref={provided.innerRef} {...provided.draggableProps}>
+          <TagTitle {...provided.dragHandleProps}>{title}</TagTitle>
+          <CardList id={id} tagTitle={title} cards={cards} />
+        </TagItemContainer>
+      )}
+    </Draggable>
   );
 };
 
@@ -21,11 +31,10 @@ const TagItemContainer = styled.div`
   flex-direction: column;
   align-content: center;
   min-width: 300px;
-  min-height: 50px;
+  height: fit-content;
   max-height: 90%;
   margin: 10px;
   padding: 5px;
-  overflow: hidden;
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.color.grey2};
 `;
@@ -34,10 +43,4 @@ const TagTitle = styled.div`
   height: 50px;
   margin: 5px;
   font-size: ${({ theme }) => theme.font.medium};
-`;
-const CardList = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: 5px;
 `;

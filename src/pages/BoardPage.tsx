@@ -1,17 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import BoardButtons from '../components/boards/BoardButtons';
 import BoardDetailContainer from '../components/boards/BoardDetailContainer';
 const BoardPage = () => {
   return (
-    <BoardDiv>
+    <BoardWrapper>
+      <BoardButtons />
       <BoardDetailContainer />
-    </BoardDiv>
+    </BoardWrapper>
   );
 };
 
 export default BoardPage;
 
-const BoardDiv = styled.div`
+const BoardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 `;

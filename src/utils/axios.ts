@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { BASE_URL } from '../config';
 import Auth from './auth';
-import handleHttpError from './error';
+// import handleHttpError from './error';
 
 class Axios {
   private instance: AxiosInstance;
