@@ -32,4 +32,5 @@ const CardListContainer = styled.div<{ isDraggingOver: boolean }>`
   margin: 5px;
   background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'lightblue' : 'none')};
   border-radius: ${({ theme }) => theme.borderRadius};
+  overflow: scroll;
 `;

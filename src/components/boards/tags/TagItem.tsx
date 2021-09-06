@@ -31,11 +31,10 @@ const TagItemContainer = styled.div`
   flex-direction: column;
   align-content: center;
   min-width: 300px;
-  min-height: 50px;
+  height: fit-content;
   max-height: 90%;
   margin: 10px;
   padding: 5px;
-  overflow: hidden;
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.color.grey2};
 `;
