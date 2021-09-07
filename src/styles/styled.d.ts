@@ -1,5 +1,5 @@
 import 'styled-components';
-
+import { css } from 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: string;
@@ -14,7 +14,7 @@ declare module 'styled-components' {
       white: string;
     };
     font: {
-      small: string;
+      small: css;
       medium: string;
       large: string;
       x_large: string;
