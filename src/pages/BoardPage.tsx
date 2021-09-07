@@ -1,12 +1,22 @@
 import React from 'react';
+import { Route, Switch, useLocation } from 'react-router';
 import styled from 'styled-components';
 import BoardButtons from '../components/boards/BoardButtons';
 import BoardDetailContainer from '../components/boards/BoardDetailContainer';
+import CardModal from '../components/boards/modal/CardModal';
+interface LocationState {
+  background: { pathname: string; search: string; hash: string; state: {} | null };
+}
 const BoardPage = () => {
+  const location = useLocation<LocationState>();
+  const background = location.state && location.state.background;
   return (
     <BoardWrapper>
       <BoardButtons />
-      <BoardDetailContainer />
+      <Switch location={background || location}>
+        <BoardDetailContainer />
+      </Switch>
+      {background && <Route path={'/card/:id'} children={<CardModal />} />}
     </BoardWrapper>
   );
 };

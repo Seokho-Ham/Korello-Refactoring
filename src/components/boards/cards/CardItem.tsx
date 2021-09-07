@@ -1,8 +1,11 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const CardItem = ({ id, title, content }: { id: number; title: string; content: string }) => {
+  const location = useLocation();
   return (
     <Draggable key={id} draggableId={`title${id}`} index={id}>
       {provided => (
@@ -11,7 +14,7 @@ const CardItem = ({ id, title, content }: { id: number; title: string; content: 
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <h2>{title}</h2>
+          <Link to={{ pathname: `/card/${id}`, state: { background: location } }}>{title}</Link>
           <div>{content}</div>
         </CardItemContainer>
       )}
