@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components';
+import { css, DefaultTheme } from 'styled-components';
 
 const myTheme: DefaultTheme = {
   borderRadius: '0.5rem',
@@ -14,7 +14,10 @@ const myTheme: DefaultTheme = {
   },
 
   font: {
-    small: '1rem',
+    small: css`
+      font-size: 1.2rem;
+      font-weight: 400;
+    `,
     medium: '1.4rem',
     large: '1.6rem',
     x_large: '2rem',

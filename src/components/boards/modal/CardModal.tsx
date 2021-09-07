@@ -2,12 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import ModalMain from './ModalMain';
 import ModalSidebar from './ModalSidebar';
-
+import { BiCard } from 'react-icons/bi';
+import { useLocation } from 'react-router';
+import { LocationState } from '../../../pages/BoardPage';
+import { Link } from 'react-router-dom';
+import { CgClose } from 'react-icons/cg';
 const CardModal = () => {
+  const location = useLocation<LocationState>();
+
   return (
     <ModalWrapper>
       <ModalContainer>
-        <ModalHeader>모달</ModalHeader>
+        <ModalHeader>
+          <Title>
+            <BiCard size='32px' /> <div>Title</div>
+            <Link to={location.state.background.pathname} style={{ float: 'right', margin: '8px' }}>
+              <CgClose size='25px' />
+            </Link>
+          </Title>
+        </ModalHeader>
         <ModalContents>
           <ModalMain />
           <ModalSidebar />
@@ -50,4 +63,14 @@ const ModalHeader = styled.div`
 const ModalContents = styled.div`
   height: 90%;
   display: flex;
+`;
+const Title = styled.div`
+  margin: 7px;
+  div {
+    display: inline-block;
+    position: relative;
+    top: -8px;
+    margin: 0px 10px;
+    font-size: ${({ theme }) => theme.font.x_large};
+  }
 `;

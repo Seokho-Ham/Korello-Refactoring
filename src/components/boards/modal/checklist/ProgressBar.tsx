@@ -19,7 +19,6 @@ const ProgressBar = ({ percent }: ProgressBarProps) => {
 export default ProgressBar;
 
 const Container = styled.div`
-  padding: 0px 10px;
   margin: 6px 0px;
   display: flex;
 `;
@@ -30,7 +29,7 @@ const ProgressContent = styled.div`
   margin-right: 5px;
 `;
 const ProgressBackground = styled.div`
-  width: 490px;
+  width: 98%;
   overflow: hidden;
   height: 8px;
   background-color: rgba(9, 30, 66, 0.08);

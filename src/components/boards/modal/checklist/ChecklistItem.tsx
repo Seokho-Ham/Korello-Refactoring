@@ -19,8 +19,7 @@ const ChecklistItem = ({ id, status, title }: ChecklistItemProps) => {
 export default ChecklistItem;
 
 const ItemContainer = styled.div`
-  padding: 0px 10px;
-  margin: 5px 0px;
+  margin: 10px 0px;
   font-size: 16px;
   span {
     margin: 0px 10px;

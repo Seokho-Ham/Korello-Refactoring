@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { GoChecklist } from 'react-icons/go';
 import ChecklistItem from './ChecklistItem';
-import ProgressBar from '../../cards/ProgressBar';
+import ProgressBar from './ProgressBar';
 const Checklist = () => {
   return (
     <Container>
@@ -28,7 +28,7 @@ const Container = styled.div`
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px;
+  margin: 10px;
 `;
 
 const Title = styled.div`
