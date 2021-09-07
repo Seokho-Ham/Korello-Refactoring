@@ -21,7 +21,7 @@ const App: React.FC = () => {
               <Route exact path='/' component={LoginPage} />
               <Route path='/login' component={LoginPage} />
               <Route path='/boards' component={MainPage} />
-              <Route path={['/board/:id/cards', '/card/:id']} component={BoardPage} />
+              <Route path={['/board/:id/cards', '/board/:id/card/:id']} component={BoardPage} />
             </Switch>
           </BrowserRouter>
         </DragDropContext>

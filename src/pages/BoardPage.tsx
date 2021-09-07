@@ -5,10 +5,21 @@ import BoardButtons from '../components/boards/BoardButtons';
 import BoardDetailContainer from '../components/boards/BoardDetailContainer';
 import CardModal from '../components/boards/modal/CardModal';
 export interface LocationState {
-  background: { pathname: string; search: string; hash: string; state: {} | null };
+  background: { pathname: string; search: string; hash: string; state: {} | undefined };
 }
 const BoardPage = () => {
   const location = useLocation<LocationState>();
+  if (!location.state && location.pathname.includes('card/')) {
+    const boardId = Number(location.pathname.slice(7, 9));
+    location.state = {
+      background: {
+        pathname: `/board/${boardId}/cards`,
+        search: '',
+        hash: '',
+        state: undefined,
+      },
+    };
+  }
   const background = location.state && location.state.background;
   return (
     <BoardWrapper>
@@ -16,7 +27,7 @@ const BoardPage = () => {
       <Switch location={background || location}>
         <BoardDetailContainer />
       </Switch>
-      {background && <Route path={'/card/:id'} children={<CardModal />} />}
+      {background && <Route path={'/board/:id/card/:id'} children={<CardModal />} />}
     </BoardWrapper>
   );
 };

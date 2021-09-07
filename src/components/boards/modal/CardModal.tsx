@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { MouseEvent, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import ModalMain from './ModalMain';
 import ModalSidebar from './ModalSidebar';
 import { BiCard } from 'react-icons/bi';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { LocationState } from '../../../pages/BoardPage';
 import { Link } from 'react-router-dom';
 import { CgClose } from 'react-icons/cg';
 const CardModal = () => {
   const location = useLocation<LocationState>();
-
+  const history = useHistory();
+  const closeModal = (e: MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      history.push(location.state.background.pathname);
+    }
+  };
   return (
-    <ModalWrapper>
+    <ModalWrapper className='modal-wrapper' onClick={closeModal}>
       <ModalContainer>
         <ModalHeader>
           <Title>
@@ -40,6 +45,7 @@ const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000000a3;
+  overflow: scroll;
 `;
 
 const ModalContainer = styled.div`
