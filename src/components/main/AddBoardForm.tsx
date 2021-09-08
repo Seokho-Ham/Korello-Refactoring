@@ -1,12 +1,14 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, MouseEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { addBoard } from '../../api/main';
 import useInput from '../../hooks/useInput';
+import { addBoardAction } from '../../reducers/main';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
 const AddBoardForm = () => {
-  const [boardTitle, setBoardTitle] = useInput('');
+  const [boardTitle, setBoardTitle, boardChangeHandler] = useInput('');
   const [status, statusHandler] = useState(false);
   const dispatch = useDispatch();
 
@@ -14,22 +16,35 @@ const AddBoardForm = () => {
     statusHandler(!status);
   };
 
-  const submitHandler: (e: FormEvent<HTMLFormElement>) => void = e => {
-    e.preventDefault();
-    //api 요청하는 코드 추가
-    //응답으로 온 데이터 현재 store 데이터에 추가할것.
+  const submitHandler: MouseEventHandler<HTMLElement> = async () => {
+    if (boardTitle === '') {
+      alert('이름을 입력해주세요.');
+    } else {
+      const { result_body } = await addBoard({ name: boardTitle });
+      console.log(result_body);
+      if (result_body) {
+        dispatch(addBoardAction(result_body));
+        statusHandler(!status);
+        setBoardTitle('');
+      } else {
+        dispatch(fail());
+      }
+    }
   };
   return (
-    <div>
-      <BoardForm status={status} onSubmit={submitHandler}>
+    <FormWrapper>
+      <BoardForm status={status}>
         <Input
           type='text'
           value={boardTitle}
-          onChange={setBoardTitle}
+          onChange={boardChangeHandler}
           custom={{ width: '150px', height: '25px', margin: '5px' }}
         />
         <FormButtonContainer>
-          <Button {...{ btType: 'add', size: { width: '70px', height: '30px', margin: '5px' } }}>
+          <Button
+            {...{ btType: 'add', size: { width: '70px', height: '30px', margin: '5px' } }}
+            onClick={submitHandler}
+          >
             Add
           </Button>
           <Button
@@ -41,18 +56,22 @@ const AddBoardForm = () => {
         </FormButtonContainer>
       </BoardForm>
       <Button
-        {...{ size: { width: '200px', height: '100px', margin: '5px' }, visible: status }}
+        {...{ size: { width: '200px', height: '100px' }, visible: status }}
         onClick={onClickHandler}
       >
         Add Board
       </Button>
-    </div>
+    </FormWrapper>
   );
 };
 
 export default AddBoardForm;
 
-const BoardForm = styled.form<{ status: boolean }>`
+const FormWrapper = styled.div`
+  margin: 10px;
+`;
+
+const BoardForm = styled.div<{ status: boolean }>`
   display: ${props => (props.status ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
@@ -60,7 +79,6 @@ const BoardForm = styled.form<{ status: boolean }>`
   background-color: ${({ theme }) => theme.color.grey2};
   width: 200px;
   height: 100px;
-  margin: 5px;
   border-radius: ${({ theme }) => theme.borderRadius};
 `;
 

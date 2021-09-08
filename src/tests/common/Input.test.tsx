@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput';
 
 describe('<Input/>', () => {
   const UserInput: React.FC = () => {
-    const [value, onChangeHandler] = useInput('');
+    const [value, setValue, onChangeHandler] = useInput('');
     return <Input value={value} onChange={onChangeHandler} type='text' />;
   };
 
