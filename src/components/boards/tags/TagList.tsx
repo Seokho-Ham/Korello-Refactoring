@@ -5,6 +5,7 @@ import TagItem from './TagItem';
 import { Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
+import AddTagForm from './AddTagForm';
 const BoardTagList = () => {
   const { tagList, cardList } = useSelector((state: RootState) => state.boardReducer);
   return (
@@ -12,11 +13,19 @@ const BoardTagList = () => {
       {provided => (
         <TagListContainer ref={provided.innerRef} {...provided.droppableProps}>
           {tagList.length > 0
-            ? tagList.map((el, index) => (
-                <TagItem key={index} index={index} title={el.name} cards={cardList[el.name]} />
-              ))
-            : '보드가 비어있습니다  '}
+            ? tagList
+                .sort((a, b) => a.order - b.order)
+                .map((el, index) => (
+                  <TagItem
+                    key={index}
+                    index={index}
+                    title={el.name}
+                    cards={Object.keys(cardList) ? cardList[el.name] : null}
+                  />
+                ))
+            : null}
           {provided.placeholder}
+          <AddTagForm />
         </TagListContainer>
       )}
     </Droppable>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CardItem as CardItemType } from '../../../reducers/board';
 import CardItem from './CardItem';
 
-const CardList = ({ tagTitle, cards }: { tagTitle: string; cards: CardItemType[] }) => {
+const CardList = ({ tagTitle, cards }: { tagTitle: string; cards?: CardItemType[] | null }) => {
   return (
     <Droppable droppableId={tagTitle}>
       {(provided, snapshot) => (
@@ -13,9 +13,10 @@ const CardList = ({ tagTitle, cards }: { tagTitle: string; cards: CardItemType[]
           isDraggingOver={snapshot.isDraggingOver}
           {...provided.droppableProps}
         >
-          {cards.map((item, num) => (
-            <CardItem key={item.id} id={Number(item.id)} title={item.name} />
-          ))}
+          {cards &&
+            cards.map((item, num) => (
+              <CardItem key={item.id} id={Number(item.id)} title={item.name} />
+            ))}
           {provided.placeholder}
         </CardListContainer>
       )}

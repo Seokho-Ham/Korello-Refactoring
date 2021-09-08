@@ -32,6 +32,8 @@ class Firebase {
     this.instance = getFirestore(firebaseApp);
   }
 
+  // BOARD --------------------------------------------------------------------------
+
   public setBoardStore = async (data: []) => {
     data.map(async (el: BoardItem) => {
       await setDoc(doc(this.instance, 'korello', el.id), {}, { merge: true });
@@ -44,16 +46,22 @@ class Firebase {
     await deleteDoc(doc(this.instance, 'korello', id));
   };
 
-  public setTagList = async (boardId: string, list: []) => {
-    list.map(async (el, index) => {
-      await updateDoc(doc(this.instance, 'korello', boardId), {
-        tagValue: el,
-        order: index,
-      });
+  // TAG --------------------------------------------------------------------------
+
+  public addTagStore = async (boardId: string, tagValue: string, length: number) => {
+    await updateDoc(doc(this.instance, 'korello', boardId), {
+      [tagValue]: { order: length + 1 },
     });
   };
 
-  public getTagList = async () => {};
+  public getTagList = async (boardId: string) => {
+    const docSnap = await getDoc(doc(this.instance, 'korello', boardId));
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      alert('firebase에 해당 데이터가 존재하지 않습니다.');
+    }
+  };
 }
 
 export default new Firebase();

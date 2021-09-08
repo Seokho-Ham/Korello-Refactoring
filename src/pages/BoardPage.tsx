@@ -15,6 +15,7 @@ import {
 import BoardAPI from '../api/board';
 import { RootState } from '../reducers';
 import Loading from '../components/common/Loading';
+import Firebase from '../firebase';
 
 export interface LocationState {
   background: { pathname: string; search: string; hash: string; state: {} | undefined };
@@ -24,7 +25,7 @@ const BoardPage = () => {
   const dispatch = useDispatch();
   const location = useLocation<LocationState>();
   if (!location.state && location.pathname.includes('card/')) {
-    const boardId = Number(location.pathname.slice(7, 9));
+    const boardId = location.pathname.slice(7, 9);
     location.state = {
       background: {
         pathname: `/board/${boardId}/cards`,
@@ -37,27 +38,30 @@ const BoardPage = () => {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-    const boardId = Number(location.pathname.slice(7, 9));
-    dispatch(setBoardIdAction(String(boardId)));
+    const boardId = location.pathname.slice(7, 9);
+    dispatch(setBoardIdAction(boardId));
     (async () => {
       dispatch(boardLoadingAction());
-      const { result_body } = await BoardAPI.getCardList(String(boardId));
+      // 1. firebase로부터 tag목록을 받아온다.
+      let list: any = await Firebase.getTagList(boardId);
+      const tagList: TagItem[] = [];
+      Object.keys(list).map(el => {
+        tagList.push({ name: el, order: list[el].order });
+      });
+
+      // 2. korello서버로부터 card목록을 받아온다.
+      const { result_body } = await BoardAPI.getCardList(boardId);
+
       const cardList: { [key: string]: CardItem[] } = {};
-      const list: string[] = [];
+      // 3. tag이름에 따라 cardList 객체를 분배한다.
       result_body.map((el: CardItem) => {
-        if (!list.includes(el.tagValue)) {
-          list.push(el.tagValue);
-          if (!cardList[el.tagValue]) {
-            cardList[el.tagValue] = [el];
-          } else {
-            cardList[el.tagValue].push(el);
-          }
+        if (!cardList[el.tagValue]) {
+          cardList[el.tagValue] = [el];
+        } else {
+          cardList[el.tagValue].push(el);
         }
       });
-      const tagList: TagItem[] = [];
-      list.map((el, index) => {
-        tagList.push({ name: el, order: index });
-      });
+
       dispatch(getCardAction({ tagList, cardList }));
     })();
   }, []);

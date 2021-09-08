@@ -39,12 +39,18 @@ type BoardState = {
   currentCard: CurrentCard;
 };
 const LOADING = 'board/LOADING' as const;
+const SETTAG = 'board/TAG' as const;
+const SETCARD = 'board/CARD' as const;
 const GETCARDS = 'board/GETCARDS' as const;
 const SETCURRENTCARD = 'board/SETCURRENTCARD' as const;
 const SETBOARDID = 'board/SETBOARDID' as const;
 
 export const boardLoadingAction = () => ({ type: LOADING });
-
+export const setTagAction = (data: TagItem) => ({ type: SETTAG, payload: data });
+export const setCardAction = (data: { [key: string]: CardItem[] }) => ({
+  type: SETCARD,
+  payload: data,
+});
 export const getCardAction = (data: {
   tagList: TagItem[];
   cardList: { [key: string]: CardItem[] };
@@ -62,6 +68,8 @@ export const setBoardIdAction = (data: string) => ({
 });
 
 type BoardAction =
+  | ReturnType<typeof setCardAction>
+  | ReturnType<typeof setTagAction>
   | ReturnType<typeof boardLoadingAction>
   | ReturnType<typeof getCardAction>
   | ReturnType<typeof setCurrentCardAction>
@@ -86,6 +94,10 @@ function boardReducer(state: BoardState = boardState, action: BoardAction): Boar
   switch (action.type) {
     case LOADING:
       return { ...state, loading: true };
+    case SETTAG:
+      return { ...state, tagList: [...state.tagList, action.payload] };
+    case SETCARD:
+      return { ...state, cardList: action.payload };
     case SETBOARDID:
       return { ...state, currentBoardId: action.payload, loading: false };
     case SETCURRENTCARD:

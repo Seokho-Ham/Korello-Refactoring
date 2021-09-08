@@ -72,7 +72,7 @@ const FormWrapper = styled.div`
   margin: 10px;
 `;
 
-const BoardForm = styled.div<{ status: boolean }>`
+export const BoardForm = styled.div<{ status: boolean }>`
   display: ${props => (props.status ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;

@@ -37,6 +37,10 @@ const CardItemContainer = styled.div`
   background: #fff;
   margin: 5px;
   padding: 5px;
-  /* box-shadow: ${({ theme }) => theme.shadow}; */
+  box-shadow: 0 1px 0 #091e4240;
   border-radius: ${({ theme }) => theme.borderRadius};
+
+  &:hover {
+    background-color: #f0f1f5;
+  }
 `;
