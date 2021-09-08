@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput';
 import { addBoardAction } from '../../reducers/main';
 import Button from '../common/Button';
 import Input from '../common/Input';
-
+import Firebase from '../../firebase';
 const AddBoardForm = () => {
   const [boardTitle, setBoardTitle, boardChangeHandler] = useInput('');
   const [status, statusHandler] = useState(false);
@@ -24,6 +24,7 @@ const AddBoardForm = () => {
       console.log(result_body);
       if (result_body) {
         dispatch(addBoardAction(result_body));
+        await Firebase.addBoardStore(result_body.id);
         statusHandler(!status);
         setBoardTitle('');
       } else {
