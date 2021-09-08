@@ -1,17 +1,19 @@
-import React, { MouseEventHandler } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { boardList } from '../../assets/data';
-import Button from '../common/Button';
+import { RootState } from '../../reducers';
+
 import AddBoardForm from './AddBoardForm';
 import BoardItem from './BoardItem';
 const BoardList = () => {
+  const { boardList } = useSelector((state: RootState) => state.mainReducer);
+
   return (
     <ListWrapper>
       <ListTitle>Personal Boards</ListTitle>
       <ListItems>
         {boardList.map(board => (
-          <BoardItem key={board.id} id={board.id} title={board.title} />
+          <BoardItem key={board.id} id={board.id} name={board.name} />
         ))}
         <AddBoardForm />
       </ListItems>
@@ -38,5 +40,4 @@ const ListTitle = styled.div`
 const ListItems = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;

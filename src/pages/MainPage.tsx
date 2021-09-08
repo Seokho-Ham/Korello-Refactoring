@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Button from '../components/common/Button';
+import { getBoardList } from '../api/main';
 import BoardListContainer from '../components/main/BoardListContainer';
 import SideBar from '../components/main/SideBar';
+import { loading, getListAction } from '../reducers/main';
 
 const MainPage = () => {
   const onClickHandler: () => void = () => {
     console.log('button clicked');
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch(loading());
+      const { result_body } = await getBoardList();
+      console.log(result_body);
+      if (result_body) {
+        dispatch(getListAction(result_body));
+      } else {
+        dispatch(getListAction([]));
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <MainWrapper>
       <SideBar />

@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../reducers';
 import BoardList from './BoardList';
 
 const BoardListContainer = () => {
+  const { status } = useSelector((state: RootState) => state.mainReducer);
   return (
     <BoardListWrapper>
-      <BoardListDiv>
-        <BoardList />
-      </BoardListDiv>
+      <BoardListDiv>{status ? <div>Loading</div> : <BoardList />}</BoardListDiv>
     </BoardListWrapper>
   );
 };
