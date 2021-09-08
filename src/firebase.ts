@@ -22,16 +22,6 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyDSI2rMVCl3jW6x1gMZGlpPEtsJyGAz6YI',
-//   authDomain: 'korello.firebaseapp.com',
-//   projectId: 'korello',
-//   storageBucket: 'korello.appspot.com',
-//   messagingSenderId: '1093901952014',
-//   appId: '1:1093901952014:web:93650a55fc1ec0dfe5485f',
-//   measurementId: 'G-9G5BY14YFF',
-// };
-
 // firebase config 정보로 firebase 시작
 
 class Firebase {
