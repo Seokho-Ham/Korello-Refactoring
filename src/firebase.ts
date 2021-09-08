@@ -62,6 +62,17 @@ class Firebase {
       alert('firebase에 해당 데이터가 존재하지 않습니다.');
     }
   };
+
+  public updateTagOrder = async (
+    boardId: string,
+    source: { tagname: string; order: number },
+    destination: { tagname: string; order: number },
+  ) => {
+    await updateDoc(doc(this.instance, 'korello', boardId), {
+      [source.tagname]: { order: destination.order },
+      [destination.tagname]: { order: source.order },
+    });
+  };
 }
 
 export default new Firebase();

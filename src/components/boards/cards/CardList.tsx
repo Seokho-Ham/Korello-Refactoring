@@ -15,7 +15,7 @@ const CardList = ({ tagTitle, cards }: { tagTitle: string; cards?: CardItemType[
         >
           {cards &&
             cards.map((item, num) => (
-              <CardItem key={item.id} id={Number(item.id)} title={item.name} />
+              <CardItem key={item.id} id={Number(item.id)} title={item.name} index={num} />
             ))}
           {provided.placeholder}
         </CardListContainer>

@@ -5,9 +5,14 @@ export const onDragEnd: OnDragEndResponder = (result: DropResult, provided: Resp
   const { source, destination } = result;
   if (!destination) return;
 
-  if (source.droppableId === destination.droppableId) {
-    //해당 리스트 내에서의 이동
+  if (source.droppableId === 'tag-list' && destination.droppableId === 'tag-list') {
+    //태그 이동의 경우
   } else {
-    //리스트를 벗어났을 경우
+    //카드 이동의 경우
+    if (source.droppableId === destination.droppableId) {
+      //해당 태그 내에서의 이동할 경우
+    } else {
+      //태그를 벗어나서 다른 태그 내로 이동할 경우
+    }
   }
 };

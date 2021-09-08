@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { RootState } from '../../../reducers';
 
-const CardItem = ({ id, title }: { id: number; title: string }) => {
+const CardItem = ({ id, title, index }: { id: number; title: string; index: number }) => {
   const { currentBoardId } = useSelector((state: RootState) => state.boardReducer);
 
   const location = useLocation();
   return (
-    <Draggable key={id} draggableId={`title${id}`} index={id}>
+    <Draggable key={id} draggableId={`title${id}`} index={index}>
       {provided => (
         <Link
           to={{ pathname: `/board/${currentBoardId}/card/${id}`, state: { background: location } }}
