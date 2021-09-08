@@ -8,7 +8,7 @@ const myTheme: DefaultTheme = {
     green: '#61d341',
     blue: '#3d3bb8',
     grey1: '#f4f5f7',
-    grey2: '#f5f5f5',
+    grey2: '#ebecf0',
     grey3: '#e5e5e5',
     white: '#fff',
   },

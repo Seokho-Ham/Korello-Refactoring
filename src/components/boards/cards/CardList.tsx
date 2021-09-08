@@ -1,10 +1,10 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { Card } from '../../../assets/data';
+import { CardItem as CardItemType } from '../../../reducers/board';
 import CardItem from './CardItem';
 
-const CardList = ({ id, tagTitle, cards }: { id: number; tagTitle: string; cards: Card[] }) => {
+const CardList = ({ tagTitle, cards }: { tagTitle: string; cards?: CardItemType[] | null }) => {
   return (
     <Droppable droppableId={tagTitle}>
       {(provided, snapshot) => (
@@ -13,9 +13,10 @@ const CardList = ({ id, tagTitle, cards }: { id: number; tagTitle: string; cards
           isDraggingOver={snapshot.isDraggingOver}
           {...provided.droppableProps}
         >
-          {cards.map((item, num) => (
-            <CardItem key={item.id} id={item.id} title={item.title} content={item.content} />
-          ))}
+          {cards &&
+            cards.map((item, num) => (
+              <CardItem key={item.id} id={Number(item.id)} title={item.name} index={num} />
+            ))}
           {provided.placeholder}
         </CardListContainer>
       )}

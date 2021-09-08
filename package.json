@@ -57,6 +57,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "firebase": "^9.0.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",

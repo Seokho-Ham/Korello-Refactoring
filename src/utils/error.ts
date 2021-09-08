@@ -37,6 +37,7 @@ const handleHttpError = async (
       window.location.href = 'http://localhost:8080/';
     }
   } else {
+    console.log(error);
     //이외의 에러 핸들링
     // 어떤 에러가
   }

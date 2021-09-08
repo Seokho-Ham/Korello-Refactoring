@@ -5,6 +5,7 @@ import { CgClose } from 'react-icons/cg';
 import { deleteBoard } from '../../api/main';
 import { useDispatch } from 'react-redux';
 import { deleteBoardAction, loading } from '../../reducers/main';
+import Firebase from '../../firebase';
 type BoardItemProps = {
   id: string;
   name: string;
@@ -16,6 +17,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
     if (window.confirm(`${name} 보드를 삭제하시겠습니까?`)) {
       dispatch(loading());
       await deleteBoard({ id });
+      await Firebase.deleteBoardStore(id);
       dispatch(deleteBoardAction({ id }));
     }
   };

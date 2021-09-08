@@ -2,22 +2,24 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { Card } from '../../../assets/data';
+import { CardItem } from '../../../reducers/board';
+import AddCardForm from '../cards/AddCardForm';
 import CardList from '../cards/CardList';
 
 interface TagItemProps {
-  id: number;
   title: string;
   index: number;
-  cards: Card[];
+  cards?: CardItem[] | null;
 }
 
-const TagItem = ({ id, index, title, cards }: TagItemProps) => {
+const TagItem = ({ index, title, cards }: TagItemProps) => {
   return (
-    <Draggable key={id} draggableId={title} index={index}>
+    <Draggable key={title} draggableId={title} index={index}>
       {provided => (
         <TagItemContainer ref={provided.innerRef} {...provided.draggableProps}>
           <TagTitle {...provided.dragHandleProps}>{title}</TagTitle>
-          <CardList id={id} tagTitle={title} cards={cards} />
+          <CardList tagTitle={title} cards={cards} />
+          <AddCardForm tagValue={title} />
         </TagItemContainer>
       )}
     </Draggable>

@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, useLocation } from 'react-router';
 import styled from 'styled-components';
 import BoardButtons from '../components/boards/BoardButtons';
 import BoardDetailContainer from '../components/boards/BoardDetailContainer';
 import CardModal from '../components/boards/modal/CardModal';
+import {
+  boardLoadingAction,
+  CardItem,
+  getCardAction,
+  setBoardIdAction,
+  TagItem,
+} from '../reducers/board';
+import BoardAPI from '../api/board';
+import { RootState } from '../reducers';
+import Loading from '../components/common/Loading';
+import Firebase from '../firebase';
+
 export interface LocationState {
   background: { pathname: string; search: string; hash: string; state: {} | undefined };
 }
 const BoardPage = () => {
+  const { loading } = useSelector((state: RootState) => state.boardReducer);
+  const dispatch = useDispatch();
   const location = useLocation<LocationState>();
   if (!location.state && location.pathname.includes('card/')) {
-    const boardId = Number(location.pathname.slice(7, 9));
+    const boardId = location.pathname.slice(7, 9);
     location.state = {
       background: {
         pathname: `/board/${boardId}/cards`,
@@ -21,11 +36,41 @@ const BoardPage = () => {
     };
   }
   const background = location.state && location.state.background;
+
+  useEffect(() => {
+    const boardId = location.pathname.slice(7, 9);
+    dispatch(setBoardIdAction(boardId));
+    (async () => {
+      dispatch(boardLoadingAction());
+      // 1. firebase로부터 tag목록을 받아온다.
+      let list: any = await Firebase.getTagList(boardId);
+      const tagList: TagItem[] = [];
+      Object.keys(list).map(el => {
+        tagList.push({ name: el, order: list[el].order });
+      });
+
+      // 2. korello서버로부터 card목록을 받아온다.
+      const { result_body } = await BoardAPI.getCardList(boardId);
+
+      const cardList: { [key: string]: CardItem[] } = {};
+      // 3. tag이름에 따라 cardList 객체를 분배한다.
+      result_body.map((el: CardItem) => {
+        if (!cardList[el.tagValue]) {
+          cardList[el.tagValue] = [el];
+        } else {
+          cardList[el.tagValue].push(el);
+        }
+      });
+
+      dispatch(getCardAction({ tagList, cardList }));
+    })();
+  }, []);
+
   return (
     <BoardWrapper>
       <BoardButtons />
       <Switch location={background || location}>
-        <BoardDetailContainer />
+        {loading ? <Loading /> : <BoardDetailContainer />}
       </Switch>
       {background && <Route path={'/board/:id/card/:id'} children={<CardModal />} />}
     </BoardWrapper>
