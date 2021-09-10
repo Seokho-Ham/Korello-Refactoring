@@ -20,7 +20,6 @@ const MainPage = () => {
       const { result_body } = await getBoardList();
       console.log(result_body);
       if (result_body) {
-        await Firebase.setBoardStore(result_body);
         dispatch(getListAction(result_body));
       } else {
         dispatch(getListAction([]));

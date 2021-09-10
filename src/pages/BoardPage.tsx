@@ -42,8 +42,8 @@ const BoardPage = () => {
     dispatch(setBoardIdAction(boardId));
     (async () => {
       dispatch(boardLoadingAction());
-      // 1. firebase로부터 tag목록을 받아온다.
-      let list: any = await Firebase.getTagList(boardId);
+      // 1. firebase로부터 tag목록을 받아와서 스토어에 데이터를 저장한다.
+      const list: any = await Firebase.getTagList(boardId);
       const tagList: TagItem[] = [];
       Object.keys(list).map(el => {
         tagList.push({ name: el, order: list[el].order });
@@ -51,9 +51,8 @@ const BoardPage = () => {
 
       // 2. korello서버로부터 card목록을 받아온다.
       const { result_body } = await BoardAPI.getCardList(boardId);
-
       const cardList: { [key: string]: CardItem[] } = {};
-      // 3. tag이름에 따라 cardList 객체를 분배한다.
+      // 3. tag이름에 따라 card를 분배한다.
       result_body.map((el: CardItem) => {
         if (!cardList[el.tagValue]) {
           cardList[el.tagValue] = [el];
@@ -61,6 +60,7 @@ const BoardPage = () => {
           cardList[el.tagValue].push(el);
         }
       });
+      cardList.rawData = result_body;
 
       dispatch(getCardAction({ tagList, cardList }));
     })();

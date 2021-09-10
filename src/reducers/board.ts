@@ -1,18 +1,3 @@
-type CurrentCard = {
-  id: string;
-  name: string;
-  labelList: CardLabel[];
-  todoList: [];
-  order: number;
-};
-
-type CardLabel = {
-  id: string;
-  name: string;
-  color: string;
-  createDate: string;
-  updateDate: string;
-};
 export type TagItem = {
   name: string;
   order: number;
@@ -27,6 +12,28 @@ export type CardItem = {
   createDate: string;
   updateDate: string;
   dueDate: string | null;
+  order: number;
+};
+
+type TodoItem = {
+  todoId: string;
+  title: string;
+  status: boolean;
+};
+
+type CardLabel = {
+  id: string;
+  name: string;
+  color: string;
+  createDate: string;
+  updateDate: string;
+};
+
+type CurrentCard = {
+  id: string;
+  name: string;
+  labelList: CardLabel[];
+  todoList: TodoItem[];
   order: number;
 };
 
