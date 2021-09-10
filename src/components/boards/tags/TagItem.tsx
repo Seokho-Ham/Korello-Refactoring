@@ -31,7 +31,6 @@ export default TagItem;
 const TagItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-content: center;
   min-width: 300px;
   height: fit-content;
   max-height: 90%;

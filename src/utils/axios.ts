@@ -42,7 +42,7 @@ class Axios {
   public delete = (url: string, config?: any) =>
     this.requestToServer({ method: 'delete', url, config });
 
-  public put = (url: string, body?: any) => this.requestToServer({ method: 'delete', url, body });
+  public put = (url: string, body?: any) => this.requestToServer({ method: 'put', url, body });
 }
 
 export default new Axios();

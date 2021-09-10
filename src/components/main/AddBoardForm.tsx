@@ -1,12 +1,10 @@
-import React, { FormEvent, MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import { addBoard } from '../../api/main';
 import useInput from '../../hooks/useInput';
 import { addBoardAction } from '../../reducers/main';
-import Button from '../common/Button';
-import Input from '../common/Input';
 import Firebase from '../../firebase';
+import AddForm from '../common/AddForm';
 const AddBoardForm = () => {
   const [boardTitle, setBoardTitle, boardChangeHandler] = useInput('');
   const [status, statusHandler] = useState(false);
@@ -33,57 +31,33 @@ const AddBoardForm = () => {
     }
   };
   return (
-    <FormWrapper>
-      <BoardForm status={status}>
-        <Input
-          type='text'
-          value={boardTitle}
-          onChange={boardChangeHandler}
-          custom={{ width: '150px', height: '25px', margin: '5px' }}
-        />
-        <FormButtonContainer>
-          <Button
-            {...{ btType: 'add', size: { width: '70px', height: '30px', margin: '5px' } }}
-            onClick={submitHandler}
-          >
-            Add
-          </Button>
-          <Button
-            {...{ btType: 'cancel', size: { width: '70px', height: '30px', margin: '5px' } }}
-            onClick={onClickHandler}
-          >
-            Cancel
-          </Button>
-        </FormButtonContainer>
-      </BoardForm>
-      <Button
-        {...{ size: { width: '200px', height: '100px' }, visible: status }}
-        onClick={onClickHandler}
-      >
-        Add Board
-      </Button>
-    </FormWrapper>
+    <AddForm
+      formCustom={{
+        status,
+        type: 'Board',
+        size: {
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          margin: '10px',
+          width: '200px',
+          height: '100px',
+        },
+      }}
+      buttonCustom={{
+        children: 'Add Card',
+        submit: submitHandler,
+        onClick: onClickHandler,
+        size: { width: '200px', height: '100px' },
+      }}
+      inputCustom={{
+        value: boardTitle,
+        onChange: boardChangeHandler,
+        placeholder: 'Add Board',
+        size: { width: '150px', height: '30px', margin: '5px' },
+      }}
+    />
   );
 };
 
 export default AddBoardForm;
-
-const FormWrapper = styled.div`
-  margin: 10px;
-`;
-
-export const BoardForm = styled.div<{ status: boolean }>`
-  display: ${props => (props.status ? 'flex' : 'none')};
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.color.grey2};
-  width: 200px;
-  height: 100px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-`;
-
-const FormButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;

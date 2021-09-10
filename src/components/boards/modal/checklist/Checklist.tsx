@@ -3,21 +3,37 @@ import styled from 'styled-components';
 import { GoChecklist } from 'react-icons/go';
 import ChecklistItem from './ChecklistItem';
 import ProgressBar from './ProgressBar';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../reducers';
+import AddChecklistButton from './AddChecklistButton';
+
+const caculateProgress = (
+  todoList: {
+    todoId: string;
+    title: string;
+    status: boolean;
+  }[],
+) => {
+  const listLength = todoList.filter(el => el.status).length;
+  const result = Math.round((listLength / todoList.length) * 100);
+  return isNaN(result) ? 0 : result;
+};
+
 const Checklist = () => {
+  const { currentCard } = useSelector((state: RootState) => state.boardReducer);
   return (
     <Container>
       <Title>
         <GoChecklist size='30' />
         <div>Checklist</div>
       </Title>
-      <ProgressBar percent={60} />
+      <ProgressBar percent={caculateProgress(currentCard.todoList)} />
       <List>
-        <ChecklistItem id={1} title='항목 1' status={true} />
-        <ChecklistItem id={2} title='항목 2' status={true} />
-        <ChecklistItem id={3} title='항목 3' status={false} />
-        <ChecklistItem id={4} title='항목 4' status={false} />
-        <ChecklistItem id={5} title='항목 5' status={true} />
+        {currentCard.todoList.map(el => (
+          <ChecklistItem key={el.todoId} id={el.todoId} title={el.title} status={el.status} />
+        ))}
       </List>
+      <AddChecklistButton />
     </Container>
   );
 };
@@ -41,4 +57,6 @@ const Title = styled.div`
     top: -6px;
   }
 `;
-const List = styled.div``;
+const List = styled.div`
+  margin: 10px 0px;
+`;

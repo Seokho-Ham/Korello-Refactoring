@@ -35,31 +35,51 @@ class Firebase {
   // BOARD --------------------------------------------------------------------------
 
   public setBoardStore = async (data: []) => {
-    data.map(async (el: BoardItem) => {
-      await setDoc(doc(this.instance, 'korello', el.id), {}, { merge: true });
-    });
+    try {
+      data.map(async (el: BoardItem) => {
+        await setDoc(doc(this.instance, 'korello', el.id), {}, { merge: true });
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
   public addBoardStore = async (id: string) => {
-    await setDoc(doc(this.instance, 'korello', id), {}, { merge: true });
+    try {
+      await setDoc(doc(this.instance, 'korello', id), {}, { merge: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
   public deleteBoardStore = async (id: string) => {
-    await deleteDoc(doc(this.instance, 'korello', id));
+    try {
+      await deleteDoc(doc(this.instance, 'korello', id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // TAG --------------------------------------------------------------------------
 
   public addTagStore = async (boardId: string, tagValue: string, length: number) => {
-    await updateDoc(doc(this.instance, 'korello', boardId), {
-      [tagValue]: { order: length + 1 },
-    });
+    try {
+      await updateDoc(doc(this.instance, 'korello', boardId), {
+        [tagValue]: { order: length + 1 },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   public getTagList = async (boardId: string) => {
-    const docSnap = await getDoc(doc(this.instance, 'korello', boardId));
-    if (docSnap.exists()) {
-      return docSnap.data();
-    } else {
-      alert('firebase에 해당 데이터가 존재하지 않습니다.');
+    try {
+      const docSnap = await getDoc(doc(this.instance, 'korello', boardId));
+      if (docSnap.exists()) {
+        return docSnap.data();
+      } else {
+        alert('firebase에 해당 데이터가 존재하지 않습니다.');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -68,10 +88,14 @@ class Firebase {
     source: { tagname: string; order: number },
     destination: { tagname: string; order: number },
   ) => {
-    await updateDoc(doc(this.instance, 'korello', boardId), {
-      [source.tagname]: { order: destination.order },
-      [destination.tagname]: { order: source.order },
-    });
+    try {
+      await updateDoc(doc(this.instance, 'korello', boardId), {
+        [source.tagname]: { order: destination.order },
+        [destination.tagname]: { order: source.order },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
