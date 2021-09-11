@@ -65,7 +65,7 @@ const CardModal = () => {
               <LabelListContainer>
                 {currentCard.labelList.map(el => {
                   return (
-                    <Label {...{ color: el.color }}>
+                    <Label key={el.id} {...{ color: el.color }}>
                       <div>{el.name}</div>
                     </Label>
                   );

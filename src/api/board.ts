@@ -5,7 +5,7 @@ class BoardAPI {
   addBoardLabel = async (boardId: string, body: { name: string; color: string }) =>
     Axios.post(`/board/${boardId}/label`, body);
   deleteBoardLabel = async (boardId: string, labelId: string) =>
-    Axios.get(`/board/${boardId}/label/${labelId}`);
+    Axios.delete(`/board/${boardId}/label/${labelId}`);
   getCardList = async (boardId: string) => Axios.get(`/board/${boardId}/cards`);
   addCard = async (
     boardId: string,

@@ -7,7 +7,7 @@ import LabelItem from './LabelItem';
 
 const LabelModal = () => {
   const { boardLabelList, currentCard } = useSelector((state: RootState) => state.boardReducer);
-  console.log(currentCard);
+
   return (
     <Wrapper>
       <LabelListContainer>
