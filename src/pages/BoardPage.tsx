@@ -8,11 +8,11 @@ import CardModal from '../components/boards/modal/CardModal';
 import {
   boardLoadingAction,
   CardItem,
-  getCardAction,
+  setBoardDataAction,
   setBoardIdAction,
   TagItem,
 } from '../reducers/board';
-import BoardAPI from '../api/board';
+import BoardApi from '../api/board';
 import { RootState } from '../reducers';
 import Loading from '../components/common/Loading';
 import Firebase from '../firebase';
@@ -50,19 +50,23 @@ const BoardPage = () => {
       });
 
       // 2. korello서버로부터 card목록을 받아온다.
-      const { result_body } = await BoardAPI.getCardList(boardId);
+      const cardData = await BoardApi.getCardList(boardId);
+      const boardLabelData = await BoardApi.getBoardLabelList(boardId);
+      console.log(boardLabelData);
       const cardList: { [key: string]: CardItem[] } = {};
       // 3. tag이름에 따라 card를 분배한다.
-      result_body.map((el: CardItem) => {
+      cardData.result_body.map((el: CardItem) => {
         if (!cardList[el.tagValue]) {
           cardList[el.tagValue] = [el];
         } else {
           cardList[el.tagValue].push(el);
         }
       });
-      cardList.rawData = result_body;
+      cardList.rawData = cardData.result_body;
 
-      dispatch(getCardAction({ tagList, cardList }));
+      dispatch(
+        setBoardDataAction({ tagList, cardList, boardLabelList: boardLabelData.result_body }),
+      );
     })();
   }, []);
 

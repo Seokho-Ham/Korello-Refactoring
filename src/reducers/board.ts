@@ -25,11 +25,11 @@ type CardLabel = {
   id: string;
   name: string;
   color: string;
-  createDate: string;
-  updateDate: string;
+  createDate?: string;
+  updateDate?: string;
 };
 
-type CurrentCard = {
+export type CurrentCard = {
   id: string;
   name: string;
   labelList: CardLabel[];
@@ -42,27 +42,28 @@ type BoardState = {
   currentBoardId: string;
   tagList: TagItem[];
   cardList: { [key: string]: CardItem[] };
-  boardLabelList: [];
+  boardLabelList: CardLabel[];
   currentCard: CurrentCard;
 };
 const LOADING = 'board/LOADING' as const;
 const SETTAG = 'board/TAG' as const;
 const SETCARD = 'board/CARD' as const;
-const GETCARDS = 'board/GETCARDS' as const;
+const SETBOARDDATA = 'board/SETBOARDDATA' as const;
 const SETCURRENTCARD = 'board/SETCURRENTCARD' as const;
 const SETBOARDID = 'board/SETBOARDID' as const;
-
+const SETBOARDLABELLIST = 'board/SETBOARDLABELLIST' as const;
 export const boardLoadingAction = () => ({ type: LOADING });
 export const setTagAction = (data: TagItem) => ({ type: SETTAG, payload: data });
 export const setCardAction = (data: { [key: string]: CardItem[] }) => ({
   type: SETCARD,
   payload: data,
 });
-export const getCardAction = (data: {
+export const setBoardDataAction = (data: {
   tagList: TagItem[];
   cardList: { [key: string]: CardItem[] };
+  boardLabelList: CardLabel[];
 }) => ({
-  type: GETCARDS,
+  type: SETBOARDDATA,
   payload: data,
 });
 export const setCurrentCardAction = (data: CurrentCard) => ({
@@ -73,14 +74,19 @@ export const setBoardIdAction = (data: string) => ({
   type: SETBOARDID,
   payload: data,
 });
+export const setBoardLabelAction = (data: CardLabel[]) => ({
+  type: SETBOARDLABELLIST,
+  payload: data,
+});
 
 type BoardAction =
   | ReturnType<typeof setCardAction>
   | ReturnType<typeof setTagAction>
   | ReturnType<typeof boardLoadingAction>
-  | ReturnType<typeof getCardAction>
+  | ReturnType<typeof setBoardDataAction>
   | ReturnType<typeof setCurrentCardAction>
-  | ReturnType<typeof setBoardIdAction>;
+  | ReturnType<typeof setBoardIdAction>
+  | ReturnType<typeof setBoardLabelAction>;
 
 const boardState: BoardState = {
   loading: false,
@@ -109,13 +115,20 @@ function boardReducer(state: BoardState = boardState, action: BoardAction): Boar
       return { ...state, currentBoardId: action.payload, loading: false };
     case SETCURRENTCARD:
       return { ...state, currentCard: action.payload, loading: false };
-    case GETCARDS:
+    case SETBOARDDATA:
       return {
         ...state,
         cardList: action.payload.cardList,
         tagList: action.payload.tagList,
+        boardLabelList: action.payload.boardLabelList,
         loading: false,
       };
+    case SETBOARDLABELLIST:
+      return {
+        ...state,
+        boardLabelList: action.payload,
+      };
+
     default:
       return state;
   }

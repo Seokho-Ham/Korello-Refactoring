@@ -62,6 +62,15 @@ const CardModal = () => {
                   <CgClose size='25px' />
                 </Link>
               </Title>
+              <LabelListContainer>
+                {currentCard.labelList.map(el => {
+                  return (
+                    <Label {...{ color: el.color }}>
+                      <div>{el.name}</div>
+                    </Label>
+                  );
+                })}
+              </LabelListContainer>
             </ModalHeader>
             <ModalContents>
               <ModalMain />
@@ -98,18 +107,18 @@ const ModalContainer = styled.div`
   top: 4rem;
   z-index: 3;
   width: 60rem;
-  height: 60rem;
+  height: 70rem;
   color: #172b4d;
 `;
 
 const ModalHeader = styled.div`
-  height: 10%;
+  height: 10rem;
   display: flex;
   flex-direction: column;
   margin: 10px;
 `;
 const ModalContents = styled.div`
-  height: 90%;
+  height: 60rem;
   display: flex;
 `;
 const Title = styled.div`
@@ -121,4 +130,21 @@ const Title = styled.div`
     margin: 0px 10px;
     font-size: ${({ theme }) => theme.font.x_large};
   }
+`;
+
+const LabelListContainer = styled.div`
+  display: flex;
+  height: 70px;
+`;
+const Label = styled.div<{ color: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px;
+  min-width: 60px;
+  height: 30px;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background-color: ${({ color }) => color};
+  text-align: center;
+  font-size: ${({ theme }) => theme.font.medium};
 `;
