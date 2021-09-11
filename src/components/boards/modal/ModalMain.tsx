@@ -15,7 +15,7 @@ const ModalMain = () => {
 export default ModalMain;
 
 const Container = styled.div`
-  width: 75%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   margin: 10px;
