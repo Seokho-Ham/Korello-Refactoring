@@ -30,14 +30,8 @@ export default Button;
 const Container = styled.button<ButtonContainer>`
   display: ${({ visible }) => (!visible ? 'inline-block' : 'none')};
   margin: ${({ size }) => (size ? size.margin : '0px')};
-  background-color: ${({ theme, btType, bgColor }) =>
-    bgColor
-      ? bgColor
-      : btType
-      ? btType === 'add'
-        ? theme.color.blue
-        : theme.color.red
-      : theme.color.grey2};
+  background-color: ${({ theme, btType }) =>
+    btType ? (btType === 'add' ? theme.color.blue : theme.color.red) : theme.color.grey2};
   width: ${({ theme, size }) => (size ? size.width : theme.button.width)};
   padding: ${({ size }) => (size ? size.padding : '0px')};
   height: ${({ theme, size }) => (size ? size.height : theme.button.height)};
@@ -49,13 +43,8 @@ const Container = styled.button<ButtonContainer>`
     cursor: default;
   }
   &:hover {
-    background-color: ${({ theme, btType, bgColor }) =>
-      bgColor
-        ? bgColor
-        : btType
-        ? btType === 'add'
-          ? theme.color.blue
-          : theme.color.red
-        : '#091e4214'};
+    /* background-color: ${({ theme, btType }) =>
+      btType ? (btType === 'add' ? theme.color.blue : theme.color.red) : '#091e4214'}; */
+    opacity: 0.7;
   }
 `;

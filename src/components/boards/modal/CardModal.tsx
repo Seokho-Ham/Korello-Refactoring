@@ -26,7 +26,7 @@ const CardModal = () => {
           name: '',
           labelList: [],
           todoList: [],
-          order: 0,
+          linkId: 0,
         }),
       );
       history.push(location.state.background.pathname);
@@ -38,10 +38,10 @@ const CardModal = () => {
       const cardId = location.pathname.slice(-2);
       if (Object.keys(cardList).length !== 0 && currentCard.id !== cardId) {
         const { result_body } = await TodoApi.getCardTodoList(cardId);
-        const { id, name, labels, order } = cardList.rawData.filter(el => el.id === cardId)[0];
+        const { id, name, labels, linkId } = cardList.rawData.filter(el => el.id === cardId)[0];
 
         dispatch(
-          setCurrentCardAction({ id, name, labelList: labels, todoList: result_body, order }),
+          setCurrentCardAction({ id, name, labelList: labels, todoList: result_body, linkId }),
         );
       }
     })();

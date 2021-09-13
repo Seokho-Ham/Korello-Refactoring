@@ -46,6 +46,8 @@ const ChecklistItem = ({ id, status, title }: ChecklistItemProps) => {
 export default ChecklistItem;
 
 const ItemContainer = styled.div`
+  display: flex;
+  align-items: center;
   margin: 10px 0px;
   font-size: 16px;
   span {

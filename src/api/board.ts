@@ -13,7 +13,7 @@ class BoardAPI {
       name: string;
       tagValue: string;
       members: string[];
-      order: number;
+      linkId: number;
     },
   ) => Axios.post(`/board/${boardId}/card`, body);
   deleteCard = async (boardId: string, body: { id: string }) =>

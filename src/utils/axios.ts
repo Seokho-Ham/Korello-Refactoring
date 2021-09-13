@@ -30,7 +30,11 @@ class Axios {
   }) => {
     try {
       const { data } = await this.instance[method](url, body, config);
-      return data;
+      if (data.result_code === 9999) {
+        throw new Error('9999');
+      } else {
+        return data;
+      }
     } catch (error: any) {
       handleHttpError(error, { method, url, body, config }, this.requestToServer);
     }

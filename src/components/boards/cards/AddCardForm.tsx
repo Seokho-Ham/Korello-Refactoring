@@ -20,7 +20,7 @@ const AddCardForm = ({ tagValue }: { tagValue: string }) => {
         name: cardName,
         tagValue,
         members: [''],
-        order: cardList[tagValue] ? cardList[tagValue].length : 0,
+        linkId: cardList[tagValue] ? cardList[tagValue].length : 0,
       });
       const list = { ...cardList };
       if (list[tagValue]) {

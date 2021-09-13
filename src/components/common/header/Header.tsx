@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../assets/images/title-logo.png';
 import { RootState } from '../../../reducers';
@@ -11,7 +12,7 @@ const Header = () => {
   return (
     <HeaderDiv loginStatus={loginStatus}>
       <HeaderLeftButtons />
-      <HeaderLogo aria-label='logo-image' />
+      <HeaderLogo to='/' aria-label='logo-image' />
       <HeaderRightButtons />
     </HeaderDiv>
   );
@@ -29,7 +30,7 @@ const HeaderDiv = styled.div<{ loginStatus: boolean }>`
   background: #3d3bb8;
 `;
 
-const HeaderLogo = styled.div`
+const HeaderLogo = styled(Link)`
   background-position: center;
   background-image: url(${logo});
   background-repeat: no-repeat;

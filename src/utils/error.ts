@@ -1,3 +1,4 @@
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Auth from './auth';
 import Axios from './axios';
 interface HttpError extends Error {
@@ -6,7 +7,7 @@ interface HttpError extends Error {
 }
 
 const handleHttpError = async (
-  error: HttpError,
+  error: any,
   config: {
     method: 'get' | 'post' | 'delete' | 'put';
     url: string;
@@ -25,21 +26,22 @@ const handleHttpError = async (
     config?: {};
   }) => Promise<any>,
 ) => {
-  const { data } = error.response;
-
-  //인증 토큰 관련 에러 핸들링
-  if (data.result_code >= 401) {
-    //토큰의 유효성 검사
-    const tokenStatus = await checkTokenStatus();
-    if (tokenStatus) {
-      await func(config);
-    } else {
-      window.location.href = 'http://localhost:8080/';
-    }
+  if (error.message === '9999') {
+    alert('9999 error');
+    window.location.reload();
   } else {
-    console.log(error);
-    //이외의 에러 핸들링
-    // 어떤 에러가
+    const { data } = error.response;
+    if (data.result_code >= 401) {
+      const tokenStatus = await checkTokenStatus();
+      if (tokenStatus) {
+        await func(config);
+      } else {
+        window.location.href = 'http://localhost:8080/';
+      }
+    } else if (data.result_code === 500) {
+      alert('Internal Server Error');
+      window.location.reload();
+    }
   }
 };
 

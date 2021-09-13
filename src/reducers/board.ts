@@ -12,7 +12,7 @@ export type CardItem = {
   createDate: string;
   updateDate: string;
   dueDate: string | null;
-  order: number;
+  linkId: number;
 };
 
 type TodoItem = {
@@ -34,7 +34,7 @@ export type CurrentCard = {
   name: string;
   labelList: CardLabel[];
   todoList: TodoItem[];
-  order: number;
+  linkId: number;
 };
 
 type BoardState = {
@@ -99,7 +99,7 @@ const boardState: BoardState = {
     name: '',
     labelList: [],
     todoList: [],
-    order: 0,
+    linkId: 0,
   },
 };
 
