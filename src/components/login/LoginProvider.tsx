@@ -1,6 +1,6 @@
 import React, { ReactChild, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../reducers/login';
+import { login, logout } from '../../reducers/login';
 import Auth from '../../utils/auth';
 
 type LoginProviderProps = {
@@ -15,6 +15,8 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
   const checkLogin = () => {
     if (tokenStatus || accessToken) {
       dispatch(login());
+    } else {
+      dispatch(logout());
     }
   };
 
