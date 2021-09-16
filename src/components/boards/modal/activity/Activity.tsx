@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import ActivityItem from './ActivityItem';
+import EventApi from '../../../../api/event';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../reducers';
 const Activity = () => {
+  const { currentBoardId, currentCard } = useSelector((state: RootState) => state.boardReducer);
+  // useEffect(() => {
+  //   const fetchEvents = async () => {
+  //     const boardEvents = await EventApi.getBoardEvents(currentBoardId);
+  //     const cardEvents = await EventApi.getBoardEvents(currentCard.id);
+  //     console.log('boardEvents: ', boardEvents);
+  //     console.log('cardEvents: ', cardEvents);
+  //   };
+  //   fetchEvents();
+  // }, []);
+
   return (
     <Container>
       <Header>

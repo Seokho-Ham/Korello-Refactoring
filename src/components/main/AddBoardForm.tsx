@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBoard } from '../../api/main';
+import MainApi from '../../api/main';
 import useInput from '../../hooks/useInput';
 import { addBoardAction } from '../../reducers/main';
 import Firebase from '../../firebase';
@@ -18,7 +18,7 @@ const AddBoardForm = () => {
     if (boardTitle === '') {
       alert('이름을 입력해주세요.');
     } else {
-      const { result_body } = await addBoard({ name: boardTitle });
+      const { result_body } = await MainApi.addBoard({ name: boardTitle });
       console.log(result_body);
       if (result_body) {
         dispatch(addBoardAction(result_body));

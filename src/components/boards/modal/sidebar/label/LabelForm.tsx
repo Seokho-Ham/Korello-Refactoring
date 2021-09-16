@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../../../common/Button';
 import { ColorResult, TwitterPicker } from 'react-color';
@@ -14,6 +14,7 @@ const LabelForm = () => {
   const [status, setStatus] = useState(false);
   const [color, setColor] = useState('');
   const dispatch = useDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
   const submitHandler = async () => {
     if (labelTitle.length === 0 || color.length === 0) {
       alert('제목과 색상을 선택해주세요!');
@@ -36,7 +37,12 @@ const LabelForm = () => {
   const onColorChangeHandler = (color: ColorResult) => {
     setColor(color.hex);
   };
-
+  useEffect(() => {
+    if (status && inputRef.current) {
+      console.log('focused');
+      inputRef.current.focus();
+    }
+  }, [status]);
   return (
     <FormWrapper>
       <FormContainer {...{ visible: status }}>
@@ -46,6 +52,7 @@ const LabelForm = () => {
           placeholder='Add Label'
           onChange={labelTitleHandler}
           custom={{ width: '95%', height: '30px', margin: '5px 0px' }}
+          customRef={inputRef}
         />
         <FormButtonContainer>
           <Button

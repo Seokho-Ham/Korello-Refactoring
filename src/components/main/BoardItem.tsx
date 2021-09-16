@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CgClose } from 'react-icons/cg';
-import { deleteBoard } from '../../api/main';
+import MainApi from '../../api/main';
 import { useDispatch } from 'react-redux';
 import { deleteBoardAction, loading } from '../../reducers/main';
 import Firebase from '../../firebase';
@@ -16,7 +16,7 @@ const BoardItem: React.FC<BoardItemProps> = ({ id, name }) => {
   const deleteBoardItem = async () => {
     if (window.confirm(`${name} 보드를 삭제하시겠습니까?`)) {
       dispatch(loading());
-      await deleteBoard({ id });
+      await MainApi.deleteBoard({ id });
       await Firebase.deleteBoardStore(id);
       dispatch(deleteBoardAction({ id }));
     }

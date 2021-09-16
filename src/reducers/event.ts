@@ -1,0 +1,4 @@
+type EventState = {
+  boardEvents: [];
+  cardEvents: [];
+};

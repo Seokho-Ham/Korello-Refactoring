@@ -35,7 +35,8 @@ const CardModal = () => {
 
   useEffect(() => {
     (async () => {
-      const cardId = location.pathname.slice(-2);
+      const cardId = location.pathname.split('/').pop() || '';
+
       if (Object.keys(cardList).length !== 0 && currentCard.id !== cardId) {
         const { result_body } = await TodoApi.getCardTodoList(cardId);
         const { id, name, labels, linkId } = cardList.rawData.filter(el => el.id === cardId)[0];

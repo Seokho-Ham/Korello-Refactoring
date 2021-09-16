@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, RefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 type InputProps = {
@@ -12,10 +12,11 @@ type InputProps = {
     width?: string;
     height?: string;
   };
+  customRef: RefObject<HTMLInputElement>;
 };
 
-const Input = ({ value, onChange, placeholder, type, custom }: InputProps) => {
-  return <Container {...{ value, onChange, placeholder, type, custom }} />;
+const Input = ({ value, onChange, placeholder, type, custom, customRef }: InputProps) => {
+  return <Container {...{ value, onChange, placeholder, type, custom }} ref={customRef} />;
 };
 
 export default Input;

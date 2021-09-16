@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, useRef } from 'react';
 import userEvent from '@testing-library/user-event';
 import Input from '../../components/common/Input';
 import { render, screen } from '../../utils/test-utils';
@@ -7,7 +7,8 @@ import useInput from '../../hooks/useInput';
 describe('<Input/>', () => {
   const UserInput: React.FC = () => {
     const [value, setValue, onChangeHandler] = useInput('');
-    return <Input value={value} onChange={onChangeHandler} type='text' />;
+    const inputRef = useRef<HTMLInputElement>(null);
+    return <Input value={value} onChange={onChangeHandler} type='text' customRef={inputRef} />;
   };
 
   it('should render Input Component on document', () => {

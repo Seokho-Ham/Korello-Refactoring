@@ -20,7 +20,9 @@ const AddCardForm = ({ tagValue }: { tagValue: string }) => {
         name: cardName,
         tagValue,
         members: [''],
-        linkId: cardList[tagValue] ? cardList[tagValue].length : 0,
+        linkId: cardList[tagValue]
+          ? Number(cardList[tagValue][cardList[tagValue].length - 1].id)
+          : 0,
       });
       const list = { ...cardList };
       if (list[tagValue]) {
@@ -47,13 +49,13 @@ const AddCardForm = ({ tagValue }: { tagValue: string }) => {
         children: 'Add Card',
         submit: submitHandler,
         onClick: onClickHandler,
-        size: { width: '300px', height: '30px', margin: '5px' },
+        size: { width: '300px', height: '30px' },
       }}
       inputCustom={{
         value: cardName,
         onChange: cardNameHandler,
         placeholder: 'Add Card',
-        size: { width: '296px', height: '30px', margin: '5px' },
+        size: { width: '290px', height: '30px', margin: '5px' },
       }}
     />
   );

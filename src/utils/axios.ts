@@ -30,6 +30,7 @@ class Axios {
   }) => {
     try {
       const { data } = await this.instance[method](url, body, config);
+      // console.log(data);
       if (data.result_code === 9999) {
         throw new Error('9999');
       } else {

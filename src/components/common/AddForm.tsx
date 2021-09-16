@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, MouseEventHandler } from 'react';
+import React, { ChangeEventHandler, MouseEventHandler, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import Input from './Input';
@@ -32,6 +32,14 @@ type FormProps = {
 };
 
 const AddForm = ({ formCustom, buttonCustom, inputCustom }: FormProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (formCustom.status && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [formCustom.status]);
+
   return (
     <Wrapper {...{ custom: formCustom.size }}>
       <FormContainer
@@ -42,6 +50,7 @@ const AddForm = ({ formCustom, buttonCustom, inputCustom }: FormProps) => {
           onChange={inputCustom.onChange}
           placeholder={inputCustom.placeholder}
           custom={inputCustom.size}
+          customRef={inputRef}
         />
         <FormButtonContainer {...{ custom: formCustom.size }}>
           <Button

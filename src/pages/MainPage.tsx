@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getBoardList } from '../api/main';
+import MainApi from '../api/main';
 import BoardListContainer from '../components/main/BoardListContainer';
 import SideBar from '../components/main/SideBar';
 import Firebase from '../firebase';
@@ -17,7 +17,7 @@ const MainPage = () => {
     const fetchData = async () => {
       dispatch(loading());
 
-      const { result_body } = await getBoardList();
+      const { result_body } = await MainApi.getBoardList();
       console.log(result_body);
       if (result_body) {
         dispatch(getListAction(result_body));

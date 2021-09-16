@@ -32,7 +32,7 @@ const AddTagForm = () => {
         children: 'Add Tag',
         submit: submitHandler,
         onClick: onClickHandler,
-        size: { width: '300px', height: '30px', margin: '5px' },
+        size: { width: '300px', height: '30px' },
       }}
       inputCustom={{
         value: tagValue,

@@ -46,7 +46,7 @@ const handleHttpError = async (
 };
 
 const checkTokenStatus = async () => {
-  const response = await Axios.post('https://hyuki.app/oauth2/refresh');
+  const response = await Axios.post('/oauth2/refresh');
 
   if (response) {
     if (response.result_code >= 401001) {

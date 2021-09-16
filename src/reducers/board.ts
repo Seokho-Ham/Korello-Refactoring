@@ -45,6 +45,7 @@ type BoardState = {
   boardLabelList: CardLabel[];
   currentCard: CurrentCard;
 };
+
 const LOADING = 'board/LOADING' as const;
 const SETTAG = 'board/TAG' as const;
 const SETCARD = 'board/CARD' as const;
@@ -52,6 +53,7 @@ const SETBOARDDATA = 'board/SETBOARDDATA' as const;
 const SETCURRENTCARD = 'board/SETCURRENTCARD' as const;
 const SETBOARDID = 'board/SETBOARDID' as const;
 const SETBOARDLABELLIST = 'board/SETBOARDLABELLIST' as const;
+
 export const boardLoadingAction = () => ({ type: LOADING });
 export const setTagAction = (data: TagItem) => ({ type: SETTAG, payload: data });
 export const setCardAction = (data: { [key: string]: CardItem[] }) => ({

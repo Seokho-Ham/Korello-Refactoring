@@ -7,21 +7,30 @@ import BoardDetailContainer from '../components/boards/BoardDetailContainer';
 import CardModal from '../components/boards/modal/CardModal';
 import {
   boardLoadingAction,
-  CardItem,
   setBoardDataAction,
   setBoardIdAction,
+  setCardAction,
   TagItem,
 } from '../reducers/board';
 import BoardApi from '../api/board';
 import { RootState } from '../reducers';
 import Loading from '../components/common/Loading';
 import Firebase from '../firebase';
+import { handleBoardData } from '../utils/handleBoardData';
+import {
+  DragDropContext,
+  DropResult,
+  OnDragEndResponder,
+  ResponderProvided,
+} from 'react-beautiful-dnd';
+import { customOnDragEnd } from '../utils/drag-drop-utils';
+import event from '../api/event';
 
 export interface LocationState {
   background: { pathname: string; search: string; hash: string; state: {} | undefined };
 }
 const BoardPage = () => {
-  const { loading } = useSelector((state: RootState) => state.boardReducer);
+  const { loading, cardList } = useSelector((state: RootState) => state.boardReducer);
   const dispatch = useDispatch();
   const location = useLocation<LocationState>();
   if (!location.state && location.pathname.includes('card/')) {
@@ -36,6 +45,12 @@ const BoardPage = () => {
     };
   }
   const background = location.state && location.state.background;
+
+  const onDragEnd: OnDragEndResponder = async (result: DropResult, provided: ResponderProvided) => {
+    console.log(result);
+    const { source, destination } = result;
+    customOnDragEnd(source, destination, dispatch, cardList);
+  };
 
   useEffect(() => {
     const boardId = location.pathname.slice(7, 9);
@@ -52,16 +67,10 @@ const BoardPage = () => {
       // 2. korello서버로부터 card목록을 받아온다.
       const cardData = await BoardApi.getCardList(boardId);
       const boardLabelData = await BoardApi.getBoardLabelList(boardId);
-      console.log(boardLabelData);
-      const cardList: { [key: string]: CardItem[] } = {};
-      // 3. tag이름에 따라 card를 분배한다.
-      cardData.result_body.map((el: CardItem) => {
-        if (!cardList[el.tagValue]) {
-          cardList[el.tagValue] = [el];
-        } else {
-          cardList[el.tagValue].push(el);
-        }
-      });
+
+      const cardList = handleBoardData(cardData.result_body);
+      console.log('cardList state: ', cardList);
+
       cardList.rawData = cardData.result_body;
 
       dispatch(
@@ -73,10 +82,12 @@ const BoardPage = () => {
   return (
     <BoardWrapper>
       <BoardButtons />
-      <Switch location={background || location}>
-        {loading ? <Loading /> : <BoardDetailContainer />}
-      </Switch>
-      {background && <Route path={'/board/:id/card/:id'} children={<CardModal />} />}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Switch location={background || location}>
+          {loading ? <Loading /> : <BoardDetailContainer />}
+        </Switch>
+        {background && <Route path={'/board/:id/card/:id'} children={<CardModal />} />}
+      </DragDropContext>
     </BoardWrapper>
   );
 };

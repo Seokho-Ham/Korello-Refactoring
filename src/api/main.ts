@@ -1,9 +1,10 @@
 import Axios from '../utils/axios';
 
-export const getBoardList = async () => await Axios.get('/board/self');
+class MainApi {
+  getBoardList = async () => await Axios.get('/api/v1/board/self');
+  getSingleBoardData = async (id: string) => await Axios.get(`/api/v1/board/${id}`);
+  addBoard = async (body: { name: string }) => await Axios.post('/api/v1/board', body);
+  deleteBoard = async (body: { id: string }) => await Axios.post('/api/v1/board/delete', body);
+}
 
-export const getOneBoard = async (id: string) => await Axios.get(`/board/${id}`);
-
-export const addBoard = async (body: { name: string }) => await Axios.post('/board', body);
-
-export const deleteBoard = async (body: { id: string }) => await Axios.post('/board/delete', body);
+export default new MainApi();

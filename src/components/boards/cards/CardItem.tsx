@@ -11,7 +11,7 @@ const CardItem = ({ id, title, index }: { id: number; title: string; index: numb
 
   const location = useLocation();
   return (
-    <Draggable key={id} draggableId={`title${id}`} index={index}>
+    <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
         <Link
           to={{ pathname: `/board/${currentBoardId}/card/${id}`, state: { background: location } }}
