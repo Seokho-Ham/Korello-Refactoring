@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import MainApi from '../api/main';
 import BoardListContainer from '../components/main/BoardListContainer';
 import SideBar from '../components/main/SideBar';
 import Firebase from '../firebase';
+import { RootState } from '../reducers';
 import { loading, getListAction } from '../reducers/main';
 
 const MainPage = () => {
+  const loginStatus = useSelector((state: RootState) => state.loginStatus.status);
+
   const onClickHandler: () => void = () => {
     console.log('button clicked');
   };
@@ -28,11 +32,13 @@ const MainPage = () => {
     fetchData();
   }, []);
 
-  return (
+  return loginStatus ? (
     <MainWrapper>
       <SideBar />
       <BoardListContainer />
     </MainWrapper>
+  ) : (
+    <Redirect to='/' />
   );
 };
 

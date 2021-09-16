@@ -12,6 +12,7 @@ import { RootState } from '../../../reducers';
 import { setCurrentCardAction } from '../../../reducers/board';
 import TodoApi from '../../../api/todo';
 import Loading from '../../common/Loading';
+import EventApi from '../../../api/event';
 
 const CardModal = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,8 @@ const CardModal = () => {
 
       if (Object.keys(cardList).length !== 0 && currentCard.id !== cardId) {
         const { result_body } = await TodoApi.getCardTodoList(cardId);
+        const data = await EventApi.getCardsEvents(cardId);
+        console.log(data);
         const { id, name, labels, linkId } = cardList.rawData.filter(el => el.id === cardId)[0];
 
         dispatch(

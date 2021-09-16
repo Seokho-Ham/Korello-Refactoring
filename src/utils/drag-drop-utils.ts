@@ -42,7 +42,6 @@ export const changeDisplayOrder = async (
         movedCard.linkId = Number(destinationCard.id);
         destinationCard = list[destinationTagValue][destination.index + 1];
       }
-
       destinationCard.linkId = Number(movedCard.id);
       break;
     case LAST:
@@ -73,7 +72,6 @@ export const changeDisplayOrder = async (
   });
 
   //기존 위치 다음카드에 대한 요청
-
   nextCard &&
     (await BoardApi.changeCardOrder(boardId, {
       id: nextCard.id,
@@ -107,21 +105,13 @@ export const customOnDragEnd = async (
   if (source.droppableId === 'tag-list' && destination.droppableId === 'tag-list') {
     //태그 이동의 경우
   } else {
-    let sameTag = false;
-    let location = '';
-    if (destination.index === 0) {
-      location = 'TOP';
-    } else if (destination.index === cardList[destination.droppableId].length - 1) {
-      location = 'LAST';
-    } else {
-      location = 'MIDDLE';
-    }
     //카드 이동의 경우
-    if (source.droppableId === destination.droppableId) {
-      //해당 태그 내에서의 이동할 경우
-      sameTag = true;
-    }
-    //태그를 벗어나서 다른 태그 내로 이동할 경우
+    const { location, sameTag } = checkCardLocation(
+      source,
+      destination,
+      cardList[destination.droppableId].length - 1,
+    );
+
     const resStatus = await changeDisplayOrder(
       sameTag,
       location,
@@ -134,5 +124,23 @@ export const customOnDragEnd = async (
       alert('카드 이동 실패');
       window.location.reload();
     }
+  }
+};
+
+const checkCardLocation = (
+  source: DraggableLocation,
+  destination: DraggableLocation,
+  length: number,
+) => {
+  let sameTag: boolean = false;
+  if (source.droppableId === destination.droppableId) {
+    sameTag = true;
+  }
+  if (destination.index === 0) {
+    return { location: 'TOP', sameTag };
+  } else if (destination.index === length) {
+    return { location: 'LAST', sameTag };
+  } else {
+    return { location: 'MIDDLE', sameTag };
   }
 };

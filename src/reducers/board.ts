@@ -34,6 +34,7 @@ export type CurrentCard = {
   name: string;
   labelList: CardLabel[];
   todoList: TodoItem[];
+  // events:[];
   linkId: number;
 };
 
@@ -101,6 +102,7 @@ const boardState: BoardState = {
     name: '',
     labelList: [],
     todoList: [],
+    // events:[],
     linkId: 0,
   },
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, useLocation } from 'react-router';
+import { Redirect, Route, Switch, useLocation } from 'react-router';
 import styled from 'styled-components';
 import BoardButtons from '../components/boards/BoardButtons';
 import BoardDetailContainer from '../components/boards/BoardDetailContainer';
@@ -30,6 +30,7 @@ export interface LocationState {
   background: { pathname: string; search: string; hash: string; state: {} | undefined };
 }
 const BoardPage = () => {
+  const loginStatus = useSelector((state: RootState) => state.loginStatus.status);
   const { loading, cardList } = useSelector((state: RootState) => state.boardReducer);
   const dispatch = useDispatch();
   const location = useLocation<LocationState>();
@@ -79,7 +80,7 @@ const BoardPage = () => {
     })();
   }, []);
 
-  return (
+  return loginStatus ? (
     <BoardWrapper>
       <BoardButtons />
       <DragDropContext onDragEnd={onDragEnd}>
@@ -89,6 +90,8 @@ const BoardPage = () => {
         {background && <Route path={'/board/:id/card/:id'} children={<CardModal />} />}
       </DragDropContext>
     </BoardWrapper>
+  ) : (
+    <Redirect to='/' />
   );
 };
 

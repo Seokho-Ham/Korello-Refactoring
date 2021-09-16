@@ -22,13 +22,18 @@ class Axios {
     url,
     body,
     config,
+    event,
   }: {
     method: 'get' | 'post' | 'delete' | 'put';
     url: string;
     body?: {};
     config?: {};
+    event?: boolean;
   }) => {
     try {
+      if (event) {
+        config = { header: {} };
+      }
       const { data } = await this.instance[method](url, body, config);
       // console.log(data);
       if (data.result_code === 9999) {
@@ -41,7 +46,8 @@ class Axios {
     }
   };
 
-  public get = (url: string) => this.requestToServer({ method: 'get', url });
+  public get = (url: string, event?: boolean) =>
+    this.requestToServer({ method: 'get', url, event });
   public post = (url: string, body?: any) => this.requestToServer({ method: 'post', url, body });
 
   public delete = (url: string, config?: any) =>
