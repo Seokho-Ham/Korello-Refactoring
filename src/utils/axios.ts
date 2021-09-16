@@ -11,8 +11,7 @@ class Axios {
     this.instance = axios.create({
       baseURL: BASE_URL,
       headers: {
-        // Authorization: 'Bearer' + accessToken,
-        coco: 'coco',
+        Authorization: 'Bearer' + accessToken,
       },
     });
   }
