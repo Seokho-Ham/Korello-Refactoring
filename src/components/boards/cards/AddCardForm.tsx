@@ -24,12 +24,14 @@ const AddCardForm = ({ tagValue }: { tagValue: string }) => {
           ? Number(cardList[tagValue][cardList[tagValue].length - 1].id)
           : 0,
       });
+      console.log(result_body);
       const list = { ...cardList };
       if (list[tagValue]) {
         list[tagValue].push(result_body);
       } else {
         list[tagValue] = [result_body];
       }
+      list['rawData'].push(result_body);
       dispatch(setCardAction(list));
       setCardName('');
       setStatus(!status);

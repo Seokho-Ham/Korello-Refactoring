@@ -28,13 +28,25 @@ type CardLabel = {
   createDate?: string;
   updateDate?: string;
 };
+type EventItem = {
+  action: string;
+  createdDate: Date;
+  lastModifiedDate: number[];
+  eventType: string;
+  id: string;
+  memberId: number;
+  memberName: string;
+  message: string;
+  selectType: string;
+};
 
 export type CurrentCard = {
   id: string;
   name: string;
+  tagValue: string;
   labelList: CardLabel[];
   todoList: TodoItem[];
-  // events:[];
+  events: EventItem[];
   linkId: number;
 };
 
@@ -100,9 +112,10 @@ const boardState: BoardState = {
   currentCard: {
     id: '',
     name: '',
+    tagValue: '',
     labelList: [],
     todoList: [],
-    // events:[],
+    events: [],
     linkId: 0,
   },
 };
@@ -118,7 +131,7 @@ function boardReducer(state: BoardState = boardState, action: BoardAction): Boar
     case SETBOARDID:
       return { ...state, currentBoardId: action.payload, loading: false };
     case SETCURRENTCARD:
-      return { ...state, currentCard: action.payload, loading: false };
+      return { ...state, currentCard: { ...state.currentCard, ...action.payload }, loading: false };
     case SETBOARDDATA:
       return {
         ...state,

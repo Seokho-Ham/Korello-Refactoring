@@ -8,12 +8,18 @@ class Axios {
 
   constructor() {
     const { accessToken } = Auth.getToken();
+    const headers =
+      process.env.PRODUCTION === 'true'
+        ? {
+            Authorization: 'Bearer' + accessToken,
+          }
+        : {
+            coco: 'coco',
+          };
+
     this.instance = axios.create({
       baseURL: BASE_URL,
-      headers: {
-        // Authorization: 'Bearer' + accessToken,
-        coco: 'coco',
-      },
+      headers,
     });
   }
 
@@ -32,7 +38,7 @@ class Axios {
   }) => {
     try {
       if (event) {
-        config = { header: {} };
+        config = { headers: {} };
       }
       const { data } = await this.instance[method](url, body, config);
       // console.log(data);

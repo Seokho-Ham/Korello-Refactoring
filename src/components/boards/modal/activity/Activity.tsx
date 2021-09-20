@@ -2,20 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import ActivityItem from './ActivityItem';
-import EventApi from '../../../../api/event';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../reducers';
 const Activity = () => {
-  const { currentBoardId, currentCard } = useSelector((state: RootState) => state.boardReducer);
-  // useEffect(() => {
-  //   const fetchEvents = async () => {
-  //     const boardEvents = await EventApi.getBoardEvents(currentBoardId);
-  //     const cardEvents = await EventApi.getBoardEvents(currentCard.id);
-  //     console.log('boardEvents: ', boardEvents);
-  //     console.log('cardEvents: ', cardEvents);
-  //   };
-  //   fetchEvents();
-  // }, []);
+  const { currentCard } = useSelector((state: RootState) => state.boardReducer);
 
   return (
     <Container>
@@ -24,10 +15,20 @@ const Activity = () => {
         <div>Activity</div>
       </Header>
       <List>
-        <ActivityItem />
-        <ActivityItem />
-        <ActivityItem />
-        <ActivityItem />
+        {currentCard.events.length > 0 &&
+          currentCard.events
+            .sort((a: any, b: any) => b.createdDate - a.createdDate)
+            .map(el => {
+              const date = el.createdDate.toDateString();
+              return (
+                <ActivityItem
+                  key={el.id}
+                  createdTime={date}
+                  message={el.message}
+                  name={el.memberName}
+                />
+              );
+            })}
       </List>
     </Container>
   );
@@ -50,4 +51,8 @@ const Header = styled.div`
   }
 `;
 
-const List = styled.div``;
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+`;

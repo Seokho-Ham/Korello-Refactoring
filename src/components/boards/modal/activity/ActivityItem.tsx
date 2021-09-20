@@ -1,13 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
-const ActivityItem = () => {
+const ActivityItem = ({
+  message,
+  name,
+  createdTime,
+}: {
+  message: string;
+  name: string;
+  createdTime: string;
+}) => {
   return (
     <Container>
       <CgProfile size='28px' />
       <Profile>
-        <Content>Name</Content>
-        <div>Time</div>
+        <Content>
+          {name}이 {message}
+        </Content>
+        <div>{createdTime}</div>
       </Profile>
     </Container>
   );
@@ -17,7 +27,8 @@ export default ActivityItem;
 
 const Container = styled.div`
   display: flex;
-  margin: 20px 0px;
+  align-items: center;
+  margin: 8px 0px;
 `;
 
 const Profile = styled.div`
@@ -27,5 +38,6 @@ const Profile = styled.div`
 `;
 
 const Content = styled.div`
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: 14px;
+  margin: 5px 0px;
 `;

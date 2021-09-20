@@ -70,7 +70,7 @@ const BoardPage = () => {
       const boardLabelData = await BoardApi.getBoardLabelList(boardId);
 
       const cardList = handleBoardData(cardData.result_body);
-      console.log('cardList state: ', cardList);
+      // console.log('cardList state: ', cardList);
 
       cardList.rawData = cardData.result_body;
 
@@ -91,7 +91,7 @@ const BoardPage = () => {
       </DragDropContext>
     </BoardWrapper>
   ) : (
-    <Redirect to='/' />
+    <Redirect to={location.pathname} />
   );
 };
 

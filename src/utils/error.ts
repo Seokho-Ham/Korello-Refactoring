@@ -1,10 +1,5 @@
-import { composeWithDevTools } from 'redux-devtools-extension';
 import Auth from './auth';
 import Axios from './axios';
-interface HttpError extends Error {
-  status: string;
-  response: { data: { result_code: number; result_message: string; result_time: string } };
-}
 
 const handleHttpError = async (
   error: any,
@@ -27,18 +22,19 @@ const handleHttpError = async (
   }) => Promise<any>,
 ) => {
   if (error.message === '9999') {
+    console.log(error);
     alert('9999 error');
     window.location.reload();
   } else {
     const { data } = error.response;
-    if (data.result_code >= 401) {
+    if (data.status >= 401 && data.status < 404) {
       const tokenStatus = await checkTokenStatus();
       if (tokenStatus) {
         await func(config);
       } else {
         window.location.href = 'http://localhost:8080/';
       }
-    } else if (data.result_code === 500) {
+    } else if (data.status === 500) {
       alert('Internal Server Error');
       window.location.reload();
     }

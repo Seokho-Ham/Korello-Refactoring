@@ -1,15 +1,5 @@
 import { initializeApp } from '@firebase/app';
-import {
-  getDoc,
-  addDoc,
-  setDoc,
-  doc,
-  getFirestore,
-  updateDoc,
-  deleteDoc,
-  collection,
-  getDocs,
-} from '@firebase/firestore';
+import { getDoc, setDoc, doc, getFirestore, updateDoc, deleteDoc } from '@firebase/firestore';
 import { BoardItem } from './reducers/main';
 
 const firebaseConfig = {

@@ -20,7 +20,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
 
   useEffect(() => {
     checkLogin();
-  });
+  }, []);
 
   return <>{children}</>;
 };
